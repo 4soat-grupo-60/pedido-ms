@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pedidos-ms-configmap
+  namespace: pedidos-ms
+data:
+  PORT: "8080"

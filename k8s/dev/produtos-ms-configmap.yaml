@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pedidos-ms-configmap
+  namespace: pedidos-ms
+data:
+  POSTGRES_USER: pedidos-ms
+  POSTGRES_DB: pedidos-ms
+  PGDATA: /application/postgres
+  POSTGRES_HOST_AUTH_METHOD: trust
+  DATABASE_URL: "postgresql://pedidos-ms:pedidos-ms@pedidos-ms-postgres:5432/pedidos-ms"
+  PORT: "8080"

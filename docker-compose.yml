@@ -1,0 +1,46 @@
+version: "3.1"
+services:
+  pedidos-ms-postgres:
+    build:
+      context: .
+      dockerfile: docker/database/Dockerfile
+    container_name: pedidos-ms-postgres
+    volumes:
+      - ./docker/database/postgres:/application/
+      - ./docker/database/seeder.sql:/application/seeder.sql
+      - ./docker/database/postgresql.conf:/var/lib/postgresql/data/postgresql.conf
+    environment:
+      - POSTGRES_USER=pedidos-ms
+      - POSTGRES_PASSWORD=pedidos-ms
+      - POSTGRES_DB=pedidos-ms
+      - PGDATA=/application/postgres
+    ports:
+      - "5433:5432"
+    networks:
+      - default
+
+  pedidos-ms:
+    build:
+      context: .
+      dockerfile: docker/node/Dockerfile
+    container_name: pedidos-ms
+    volumes:
+      - ./docker/bin:/var/bin
+    command: sh -c "npm install && chown -R www-data:www-data /var/www"
+    ports:
+      - "3002:3000"
+    links:
+      -   pedidos-ms-postgres
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.2.0/24
+volumes:
+  dbdata:
+    driver: local

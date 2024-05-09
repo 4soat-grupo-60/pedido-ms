@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pedidos-ms-postgres
+  namespace: pedidos-ms
+  labels:
+    app: pedidos-ms-postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pedidos-ms-postgres
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: pedidos-ms-postgres
+    spec:
+      volumes:
+      - name: pedidos-ms-postgres
+        persistentVolumeClaim:
+          claimName: pedidos-ms-postgres
+      containers:
+      - name: pedidos-ms-postgres
+        envFrom:
+        - configMapRef:
+            name: pedidos-ms-configmap
+        - secretRef:
+            name: pedidos-ms-postgres
+        image: postgres:16.0
+        imagePullPolicy: Always
+        workingDir: /application
+        #imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: pedidos-ms-postgres
+          mountPath: /application/postgres
+        ports:
+        - containerPort: 5432
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 512Mi
+      imagePullSecrets:
+      - name: dockerhub
+      restartPolicy: Always
