@@ -28,7 +28,7 @@ services:
       - ./docker/bin:/var/bin
     command: sh -c "npm install && chown -R www-data:www-data /var/www"
     ports:
-      - "3002:3000"
+      - "3000:3000"
     links:
       -   pedidos-ms-postgres
     networks:

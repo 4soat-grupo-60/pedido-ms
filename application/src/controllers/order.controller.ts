@@ -1,10 +1,11 @@
-import { OrderGateway } from "../gateways/repositories/orders";
-import { ProductGateway } from "../gateways/repositories/products";
-import { OrderUseCases } from "../domain/usecases/order";
-import { OrderItemInput } from "../domain/value_object/orderItemInput";
-import { DbConnection } from "../interfaces/dbconnection";
-import { OrderStatus } from "../domain/value_object/orderStatus";
-import { OrderPresenter } from "./presenters/order.presenter";
+import {OrderGateway} from "../gateways/repositories/orders";
+import {OrderUseCases} from "../domain/usecases/order";
+import {OrderItemInput} from "../domain/value_object/orderItemInput";
+import {DbConnection} from "../interfaces/dbconnection";
+import {OrderStatus} from "../domain/value_object/orderStatus";
+import {OrderPresenter} from "./presenters/order.presenter";
+import {PaymentClient} from "../gateways/services/payment_client";
+import {ProductClient} from "../gateways/services/product_client";
 
 export class OrderController {
   static async getAllOrdersOrdered(dbConnection: DbConnection) {
@@ -47,12 +48,30 @@ export class OrderController {
     dbConnection: DbConnection
   ) {
     const orderGateway = new OrderGateway(dbConnection);
-    const productGateway = new ProductGateway(dbConnection);
+    const productGateway = new ProductClient();
 
     const newOrder = await OrderUseCases.save(
       orderItems,
       orderGateway,
       productGateway
+    );
+
+    return OrderPresenter.map(newOrder);
+  }
+
+  static async updatePayment(
+    orderId: number,
+    paymentId: number,
+    dbConnection: DbConnection
+  ) {
+    const orderGateway = new OrderGateway(dbConnection);
+    const paymentGateway = new PaymentClient();
+
+    const newOrder = await OrderUseCases.updatePayment(
+      orderId,
+      paymentId,
+      orderGateway,
+      paymentGateway
     );
 
     return OrderPresenter.map(newOrder);

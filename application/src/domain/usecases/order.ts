@@ -5,7 +5,7 @@ import { OrderItem } from "../entities/orderItem";
 import { Payment } from "../entities/payment";
 import { PaymentStatus } from "../value_object/paymentStatus";
 import ProductInactiveError from "../error/ProductInactiveError";
-import { IOrderGateway, IProductGateway } from "../../interfaces/gateways";
+import {IOrderGateway, IPaymentGateway, IProductGateway} from "../../interfaces/gateways";
 import { OrderItemInput } from "../value_object/orderItemInput";
 import { CPF } from "../value_object/cpf";
 
@@ -46,10 +46,12 @@ export class OrderUseCases {
 
   static async updatePayment(
     orderId: number,
-    payment: Payment,
-    orderGateway: IOrderGateway
+    paymentId: number,
+    orderGateway: IOrderGateway,
+    paymentGateway: IPaymentGateway,
   ): Promise<Order> {
     const order = await orderGateway.getOrderByID(orderId);
+    const payment = await paymentGateway.get(paymentId);
     order.setPayment(payment);
     order.setStatus(this.getOrderStatusByPayment(payment));
 

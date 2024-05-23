@@ -15,23 +15,10 @@ export interface IOrderGateway {
   getOrderByStatus(order: OrderStatus): Promise<Array<Order>>;
 }
 
-export interface IPaymentGatewayService {
-  create(): Promise<PaymentGatewayResponse>;
-}
-
 export interface IPaymentGateway {
-  getAll(): Promise<Array<Payment>>;
   get(id: number): Promise<Payment>;
-  save(payment: Payment): Promise<Payment>;
-  getByIntegrationID(integrationID: string): Promise<Payment>;
-  updateStatus(id: number, paymentStatus: PaymentStatus): Promise<Payment>;
 }
 
 export interface IProductGateway {
-  getProductsByCategory(category: Category): Promise<Array<Product>>;
   getProductByIDs(ids: number[]): Promise<Array<Product>>;
-  getProducts(): Promise<Array<Product>>;
-  saveProduct(product: Product): Promise<Product>;
-  updateProduct(product: Product): Promise<Product>;
-  deleteProduct(id: number): Promise<void>;
 }

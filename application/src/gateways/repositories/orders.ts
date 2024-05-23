@@ -3,7 +3,7 @@ import { OrderStatus } from "../../domain/value_object/orderStatus";
 import { IOrderGateway } from "../../interfaces/gateways";
 import { DbConnection } from "../../interfaces/dbconnection";
 import OrderModelMapper from "../mapper/order.mapper";
-import OrderModel from "../model/order.model";
+import OrderModel from "./model/order.model";
 
 export class OrderGateway implements IOrderGateway {
   private repositoryData: DbConnection;

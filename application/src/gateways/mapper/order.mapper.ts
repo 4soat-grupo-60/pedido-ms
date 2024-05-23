@@ -1,6 +1,6 @@
 import { Order } from "../../domain/entities/order";
 import { CPF } from "../../domain/value_object/cpf";
-import OrderModel from "../model/order.model";
+import OrderModel from "../repositories/model/order.model";
 import OrderItemModelMapper from "./order_item.mapper";
 import PaymentModelMapper from "./payment.mapper";
 

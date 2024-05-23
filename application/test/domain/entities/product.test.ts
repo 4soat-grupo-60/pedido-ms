@@ -29,7 +29,7 @@ describe("Product Domain Entitie", () => {
     const now = new Date();
 
     const product = Product.New(
-      "1",
+      1,
       "Name product",
       "Description product",
       "Sobremesa",

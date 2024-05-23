@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
-import PaymentModel from "./payment.model";
 import OrderItemModel from "./order_item.model";
+import PaymentModel from "./payment.model";
 
 export default interface OrderModel {
   client_cpf?: string;

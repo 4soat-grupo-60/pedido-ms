@@ -1,5 +1,5 @@
 import { OrderItem } from "../../domain/entities/orderItem";
-import OrderItemModel from "../model/order_item.model";
+import OrderItemModel from "../repositories/model/order_item.model";
 import ProductMapper from "./product.mapper";
 
 export default class OrderItemModelMapper {

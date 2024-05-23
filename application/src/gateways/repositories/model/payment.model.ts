@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import {Prisma} from "@prisma/client";
 
 export default interface PaymentModel {
   id: number;
