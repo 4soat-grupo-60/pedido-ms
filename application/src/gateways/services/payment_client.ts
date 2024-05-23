@@ -11,7 +11,7 @@ export class PaymentClient implements IPaymentGateway {
     this.apiUrl = process.env.PAYMENT_API_URL;
   }
 
-  async get(id: number): Promise<Payment> {
+  async get(id: string): Promise<Payment> {
     const url = `${this.apiUrl}/api/payments/${id}`;
     const response = await fetch(url);
 

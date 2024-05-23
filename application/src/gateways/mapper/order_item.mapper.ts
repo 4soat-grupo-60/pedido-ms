@@ -7,7 +7,7 @@ export default class OrderItemModelMapper {
     return OrderItem.New(
       d.id,
       d.orderId,
-      ProductMapper.map(d.product),
+      ProductMapper.map(d),
       d.quantity.toNumber(),
       d.price.toNumber(),
       d.total.toNumber()

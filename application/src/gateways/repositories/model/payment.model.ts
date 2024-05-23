@@ -1,7 +1,7 @@
 import {Prisma} from "@prisma/client";
 
 export default interface PaymentModel {
-  id: number;
+  id: string;
   order_id: number;
   integration_id: string;
   qr_code: string;

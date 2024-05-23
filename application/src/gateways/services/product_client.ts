@@ -10,7 +10,7 @@ export class ProductClient implements IProductGateway {
     this.apiUrl = process.env.PRODUCT_API_URL;
   }
 
-  async getProductByIDs(ids: number[]): Promise<Array<Product>> {
+  async getProductByIDs(ids: string[]): Promise<Array<Product>> {
     const url = `${this.apiUrl}/api/products?ids=${ids.join(',')}`;
     const response = await fetch(url);
 

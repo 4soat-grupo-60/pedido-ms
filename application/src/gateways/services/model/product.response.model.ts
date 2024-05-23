@@ -1,7 +1,7 @@
 import {Prisma} from "@prisma/client";
 
 export default interface ProductResponseModel {
-  id: number;
+  id: string;
   name: string;
   description: string;
   category: string;

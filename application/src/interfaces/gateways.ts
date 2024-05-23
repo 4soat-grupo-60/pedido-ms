@@ -16,9 +16,9 @@ export interface IOrderGateway {
 }
 
 export interface IPaymentGateway {
-  get(id: number): Promise<Payment>;
+  get(id: string): Promise<Payment>;
 }
 
 export interface IProductGateway {
-  getProductByIDs(ids: number[]): Promise<Array<Product>>;
+  getProductByIDs(ids: string[]): Promise<Array<Product>>;
 }

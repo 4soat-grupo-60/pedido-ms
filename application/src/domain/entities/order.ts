@@ -2,14 +2,14 @@ import { Product } from "./product";
 import { Money } from "../value_object/money";
 import { OrderStatus } from "../value_object/orderStatus";
 import { OrderItem } from "./orderItem";
-import { Payment } from "./payment";
 import { CPF } from "../value_object/cpf";
 
 export class Order {
   private _id: number;
   private _items: Array<OrderItem>;
   private _clientCPF?: CPF;
-  private _payment?: Payment;
+  private _paymentId?: string;
+  private _paymentDate?: Date;
   private _valueTotal: Money;
   private _status: OrderStatus;
   private _createdAt?: Date;
@@ -28,7 +28,8 @@ export class Order {
     valueTotal: number,
     status: string,
     clientCPF?: CPF,
-    payment?: Payment,
+    paymentId?: string,
+    paymentDate?: Date,
     createdAt?: Date,
     updatedAt?: Date
   ): Order {
@@ -36,7 +37,8 @@ export class Order {
     o._id = id;
     o._items = items;
     o._clientCPF = clientCPF;
-    o._payment = payment;
+    o._paymentId = paymentId;
+    o._paymentDate = paymentDate;
     o._valueTotal = new Money(valueTotal);
     o._status = new OrderStatus(status);
     o._createdAt = createdAt;
@@ -72,10 +74,6 @@ export class Order {
     return this._clientCPF;
   }
 
-  get payment(): Payment | null {
-    return this._payment;
-  }
-
   get valueTotal(): Money {
     return this._valueTotal;
   }
@@ -92,15 +90,27 @@ export class Order {
     this._status = status;
   }
 
-  setPayment(payment: Payment) {
-    this._payment = payment;
-  }
-
   get createdAt(): Date {
     return this._createdAt;
   }
 
   get updatedAt(): Date {
     return this._updatedAt;
+  }
+
+  get paymentId(): string {
+    return this._paymentId;
+  }
+
+  setPaymentId(value: string) {
+    this._paymentId = value;
+  }
+
+  get paymentDate(): Date {
+    return this._paymentDate;
+  }
+
+  setPaymentDate(value: Date) {
+    this._paymentDate = value;
   }
 }

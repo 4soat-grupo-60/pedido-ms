@@ -12,7 +12,8 @@ export default class OrderModelMapper {
       d.total.toNumber(),
       d.status,
       d.client_cpf ? new CPF(d.client_cpf) : null,
-      !d.payment ? null : PaymentModelMapper.map(d.payment),
+      d.payment_id,
+      d.payment_date,
       d.created_at,
       d.updated_at
     );

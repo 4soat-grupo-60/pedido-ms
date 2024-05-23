@@ -61,7 +61,7 @@ export class OrderController {
 
   static async updatePayment(
     orderId: number,
-    paymentId: number,
+    paymentId: string,
     dbConnection: DbConnection
   ) {
     const orderGateway = new OrderGateway(dbConnection);

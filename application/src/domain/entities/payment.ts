@@ -5,7 +5,7 @@ export class Payment {
     return this._integrationId;
   }
 
-  private _id: number;
+  private _id: string;
   private _orderId: number;
   private _integrationId: string;
   private _qrCode: string;
@@ -29,7 +29,7 @@ export class Payment {
   }
 
   static New(
-    id: number,
+    id: string,
     orderId: number,
     integrationId: string,
     qrCode: string,
@@ -49,8 +49,8 @@ export class Payment {
 
     return py;
   }
-
-  get id(): number {
+  
+  get id(): string {
     return this._id;
   }
 

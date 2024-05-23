@@ -14,10 +14,7 @@ export class ProductPresenter {
       name: data.getName(),
       description: data.getDescription(),
       category: data.getCategory(),
-      price: data.getValueProduct(),
-      active: data.getActive(),
-      created_at: data.getCreatedAt(),
-      updated_at: data.getUpdatedAt(),
+      price: data.getValueProduct()
     };
   }
 }

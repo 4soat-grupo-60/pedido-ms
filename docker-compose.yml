@@ -15,32 +15,32 @@ services:
       - POSTGRES_DB=pedidos-ms
       - PGDATA=/application/postgres
     ports:
-      - "5433:5432"
+      - "5432:5432"
     networks:
       - default
-
-  pedidos-ms:
-    build:
-      context: .
-      dockerfile: docker/node/Dockerfile
-    container_name: pedidos-ms
-    volumes:
-      - ./docker/bin:/var/bin
-    command: sh -c "npm install && chown -R www-data:www-data /var/www"
-    ports:
-      - "3000:3000"
-    links:
-      -   pedidos-ms-postgres
-    networks:
-      - default
-
-networks:
-  default:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 192.168.2.0/24
+#
+#  pedidos-ms:
+#    build:
+#      context: .
+#      dockerfile: docker/node/Dockerfile
+#    container_name: pedidos-ms
+#    volumes:
+#      - ./docker/bin:/var/bin
+#    command: sh -c "npm install && chown -R www-data:www-data /var/www"
+#    ports:
+#      - "3000:3000"
+#    links:
+#      -   pedidos-ms-postgres
+#    networks:
+#      - default
+#
+#networks:
+#  default:
+#    driver: bridge
+#    ipam:
+#      driver: default
+#      config:
+#        - subnet: 192.168.2.0/24
 volumes:
   dbdata:
     driver: local

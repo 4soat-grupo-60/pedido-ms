@@ -6,10 +6,10 @@
   "main": "index.js",
   "scripts": {
     "server": "node dist/adapters/driver/api/program.js",
-    "dev": "set DATABASE_URL=postgresql://totem:totem@localhost:5432/totem && set PORT=3000 && nodemon ./src/index.ts",
+    "dev": "set PRODUCT_API_URL=http://localhost:3001&& set PAYMENT_API_URL=http://localhost:3002&& set DATABASE_URL=postgresql://pedidos-ms:pedidos-ms@localhost:5432/pedidos-ms&& set PORT=3000 && nodemon ./src/index.ts",
     "prisma-gen": "npx prisma generate --schema=./src/external/prisma/schema.prisma",
-    "prisma-migrate": "npx prisma migrate dev --name init --schema=./src/external/prisma/schema.prisma",
-    "prisma-seed": "npx prisma db seed",
+    "prisma-migrate": "set DATABASE_URL=postgresql://pedidos-ms:pedidos-ms@localhost:5432/pedidos-ms&& npx prisma migrate dev --name init --schema=./src/external/prisma/schema.prisma",
+    "prisma-seed": "set DATABASE_URL=postgresql://pedidos-ms:pedidos-ms@localhost:5432/pedidos-ms && npx prisma db seed",
     "test": "jest"
   },
   "license": "ISC",

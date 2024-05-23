@@ -1,13 +1,13 @@
-import { Order } from "../entities/order";
+import {Order} from "../entities/order";
 import RecordNotFoundError from "../error/RecordNotFoundError";
-import { OrderStatus } from "../value_object/orderStatus";
-import { OrderItem } from "../entities/orderItem";
-import { Payment } from "../entities/payment";
-import { PaymentStatus } from "../value_object/paymentStatus";
+import {OrderStatus} from "../value_object/orderStatus";
+import {OrderItem} from "../entities/orderItem";
+import {Payment} from "../entities/payment";
+import {PaymentStatus} from "../value_object/paymentStatus";
 import ProductInactiveError from "../error/ProductInactiveError";
 import {IOrderGateway, IPaymentGateway, IProductGateway} from "../../interfaces/gateways";
-import { OrderItemInput } from "../value_object/orderItemInput";
-import { CPF } from "../value_object/cpf";
+import {OrderItemInput} from "../value_object/orderItemInput";
+import {CPF} from "../value_object/cpf";
 
 export class OrderUseCases {
   static async save(
@@ -46,13 +46,14 @@ export class OrderUseCases {
 
   static async updatePayment(
     orderId: number,
-    paymentId: number,
+    paymentId: string,
     orderGateway: IOrderGateway,
     paymentGateway: IPaymentGateway,
   ): Promise<Order> {
     const order = await orderGateway.getOrderByID(orderId);
     const payment = await paymentGateway.get(paymentId);
-    order.setPayment(payment);
+    order.setPaymentId(payment.id);
+    order.setPaymentDate(payment.paidAt);
     order.setStatus(this.getOrderStatusByPayment(payment));
 
     return await orderGateway.update(order);
