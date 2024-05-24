@@ -26,7 +26,7 @@ spec:
         - configMapRef:
        # - secretRef:
             name: pedidos-ms-configmap
-        image: adrianoelima/pedidos-ms:1.0.0
+        image: andrauss/order-ms:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3000

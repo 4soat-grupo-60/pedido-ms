@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: pedidos-ms-postgres
-  namespace: pedidos-ms
+  namespace: totem
 spec:
   storageClassName: manual
   accessModes:

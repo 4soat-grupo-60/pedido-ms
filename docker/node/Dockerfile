@@ -23,7 +23,7 @@ ADD application/package.json /var/www/package.json
 ADD application/package-lock.json /var/www/package-lock.json
 ADD application/tsconfig.json /var/www/tsconfig.json
 
-#RUN npx prisma generate --schema=./src/external/prisma/schema.prisma
+RUN npx prisma generate --schema=./src/external/prisma/schema.prisma
 RUN npm install --loglevel verbose
 RUN tsc
 

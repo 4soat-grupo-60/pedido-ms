@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pedidos-ms-postgres
-  namespace: pedidos-ms
+  namespace: totem
   labels:
     app: pedidos-ms-postgres
 spec:
