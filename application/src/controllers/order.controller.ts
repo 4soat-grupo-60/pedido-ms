@@ -6,6 +6,8 @@ import {OrderStatus} from "../domain/value_object/orderStatus";
 import {OrderPresenter} from "./presenters/order.presenter";
 import {PaymentClient} from "../gateways/services/payment_client";
 import {ProductClient} from "../gateways/services/product_client";
+import {OrderSagaSender} from "../gateways/services/order_saga_sender";
+import {SagaSQSSender} from "../gateways/services/saga_sqs_sender";
 
 export class OrderController {
   static async getAllOrdersOrdered(dbConnection: DbConnection) {
@@ -45,15 +47,17 @@ export class OrderController {
 
   static async createOrder(
     orderItems: OrderItemInput[],
-    dbConnection: DbConnection
+    dbConnection: DbConnection,
   ) {
     const orderGateway = new OrderGateway(dbConnection);
     const productGateway = new ProductClient();
+    const sagaSender = new OrderSagaSender(new SagaSQSSender())
 
     const newOrder = await OrderUseCases.save(
       orderItems,
       orderGateway,
-      productGateway
+      productGateway,
+      sagaSender
     );
 
     return OrderPresenter.map(newOrder);
