@@ -1,11 +1,11 @@
-import { Prisma } from "@prisma/client";
+import {Prisma} from "@prisma/client";
 
-export default interface ProductModel {
-  id: number;
+export default interface ProductResponseModel {
+  id: string;
   name: string;
   description: string;
   category: string;
-  price: Prisma.Decimal;
+  price: number;
   active: boolean;
   created_at?: Date;
   updated_at?: Date;

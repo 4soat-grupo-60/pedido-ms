@@ -1,9 +1,9 @@
-import { Order } from "../../domain/entities/order";
-import { OrderStatus } from "../../domain/value_object/orderStatus";
-import { IOrderGateway } from "../../interfaces/gateways";
-import { DbConnection } from "../../interfaces/dbconnection";
+import {Order} from "../../domain/entities/order";
+import {OrderStatus} from "../../domain/value_object/orderStatus";
+import {IOrderGateway} from "../../interfaces/gateways";
+import {DbConnection} from "../../interfaces/dbconnection";
 import OrderModelMapper from "../mapper/order.mapper";
-import OrderModel from "../model/order.model";
+import OrderModel from "./model/order.model";
 
 export class OrderGateway implements IOrderGateway {
   private repositoryData: DbConnection;
@@ -14,12 +14,9 @@ export class OrderGateway implements IOrderGateway {
 
   async getOrderByStatus(status: OrderStatus): Promise<Array<Order>> {
     const dados: OrderModel[] = await this.repositoryData.order.findMany({
-      where: { status: status.getStatus() },
+      where: {status: status.getStatus()},
       include: {
-        payment: true,
-        items: {
-          include: { product: true },
-        },
+        items: true,
       },
     });
     return dados.map(OrderModelMapper.map);
@@ -28,10 +25,7 @@ export class OrderGateway implements IOrderGateway {
   async getOrders(): Promise<Array<Order>> {
     const dados: OrderModel[] = await this.repositoryData.order.findMany({
       include: {
-        payment: true,
-        items: {
-          include: { product: true },
-        },
+        items: true,
       },
     });
     return dados.map(OrderModelMapper.map);
@@ -64,15 +58,12 @@ export class OrderGateway implements IOrderGateway {
         },
       },
       include: {
-        payment: true,
-        items: {
-          include: { product: true },
-        },
+        items: true,
       },
     });
 
     const idStatusOrder: Record<number, number> = orderedIds.reduce(
-      (acc, curr) => ({ ...acc, [curr.id]: curr.order_status }),
+      (acc, curr) => ({...acc, [curr.id]: curr.order_status}),
       {} as Record<number, number>
     );
 
@@ -84,12 +75,17 @@ export class OrderGateway implements IOrderGateway {
   async save(o: Order): Promise<Order> {
     const data = {
       client_cpf: o.clientCPF?.getCPF(),
-      payment_id: o.payment?.id,
+      payment_id: o.paymentId,
+      payment_date: o.paymentDate,
       status: o.status.getStatus(),
       total: o.valueTotal.getValueMoney(),
       items: {
         create: o.items.map((i) => ({
           product_id: i.product.getId(),
+          product_name: i.product.getName(),
+          product_description: i.product.getDescription(),
+          product_category: i.product.getCategory(),
+          product_price: i.product.getValueProduct(),
           quantity: i.quantity,
           price: i.value,
           total: i.total,
@@ -108,7 +104,8 @@ export class OrderGateway implements IOrderGateway {
     const data = {
       id: o.id,
       client_cpf: o.clientCPF?.getCPF(),
-      payment_id: o.payment?.id,
+      payment_id: o.paymentId,
+      payment_date: o.paymentDate,
       status: o.status.getStatus(),
       total: o.valueTotal.getValueMoney(),
     };
@@ -119,10 +116,7 @@ export class OrderGateway implements IOrderGateway {
         id: o.id,
       },
       include: {
-        payment: true,
-        items: {
-          include: { product: true },
-        },
+        items: true,
       },
     });
 
@@ -131,12 +125,9 @@ export class OrderGateway implements IOrderGateway {
 
   async getOrderByID(orderID: number): Promise<Order | null> {
     const order = await this.repositoryData.order.findFirst({
-      where: { id: orderID },
+      where: {id: orderID},
       include: {
-        payment: true,
-        items: {
-          include: { product: true },
-        },
+        items: true,
       },
     });
 

@@ -2,14 +2,12 @@ import { Money } from "../value_object/money";
 import { Category } from "../value_object/category";
 
 export class Product {
-  private id: number;
+  private id: string;
   private name: string;
   private description: string;
   private category: Category;
   private price: Money;
   private active: boolean;
-  private createdAt?: Date;
-  private updatedAt?: Date;
 
   constructor(
     name: string,
@@ -26,20 +24,15 @@ export class Product {
   }
 
   static New(
-    id: number,
+    id: string,
     name: string,
     description: string,
     category: string,
     price: number,
     active: boolean,
-    created_at?: Date,
-    updated_at?: Date
   ): Product {
     const p = new Product(name, category, description, price, active);
     p.id = id;
-    p.active = active;
-    p.createdAt = created_at;
-    p.updatedAt = updated_at;
     return p;
   }
 
@@ -59,23 +52,15 @@ export class Product {
     return this.category.getCategory();
   }
 
-  public setId(id: number) {
+  public setId(id: string) {
     this.id = id;
   }
 
-  public getId(): number {
+  public getId(): string {
     return this.id;
   }
 
   getActive(): boolean {
     return this.active;
-  }
-
-  getCreatedAt(): Date {
-    return this.createdAt;
-  }
-
-  getUpdatedAt(): Date {
-    return this.updatedAt;
   }
 }

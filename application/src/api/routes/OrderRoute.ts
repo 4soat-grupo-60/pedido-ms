@@ -109,6 +109,25 @@ export default class OrderRoute implements IAppRoute {
         } catch (e) {
           handleAPIError(res, e);
         }
+      });    
+    
+    app
+      .route(`${this.ROUTE_BASE_PATH}/payment/:orderId/:paymentId`)
+      .put(async (req, res) => {
+        try {
+          const orderId = Number(req.params.orderId);
+          const paymentId = String(req.params.paymentId);
+
+          const order = await OrderController.updatePayment(
+            orderId,
+            paymentId,
+            this.dbConnection
+          );
+
+          res.status(200).send(order);
+        } catch (e) {
+          handleAPIError(res, e);
+        }
       });
 
     app.route(this.ROUTE_BASE_PATH).post(async (req, res) => {

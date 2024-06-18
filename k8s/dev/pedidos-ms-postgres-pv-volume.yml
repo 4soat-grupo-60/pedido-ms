@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: pedidos-ms-postgres
-  namespace: pedidos-ms
+  namespace: totem
   labels:
     type: local
 spec:

@@ -1,4 +1,4 @@
 export type OrderItemInput = {
-  product_id: number;
+  product_id: string;
   quantity: number;
 };

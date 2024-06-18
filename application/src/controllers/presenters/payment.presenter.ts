@@ -9,14 +9,7 @@ export class PaymentPresenter {
   static map(data: Payment): PaymentResponse {
     return {
       id: data.id,
-      order_id: data.orderId,
-      integration_id: data.integrationId,
-      qr_code: data.qrCode,
-      total: data.total,
-      status: data.status.value(),
       paid_at: data.paidAt,
-      created_at: data.createdAt,
-      updated_at: data.updatedAt,
     };
   }
 }

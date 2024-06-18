@@ -4,7 +4,7 @@ metadata:
   labels:
     run: pedidos-ms-postgres
   name: pedidos-ms-postgres
-  namespace: pedidos-ms
+  namespace: totem
 spec:
   type: NodePort
   ports:
