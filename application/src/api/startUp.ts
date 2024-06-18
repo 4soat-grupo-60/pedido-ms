@@ -8,6 +8,8 @@ import OrderRoute from "./routes/OrderRoute";
 import OrderQueueRoute from "./routes/OrderQueueRoute";
 import {DbConnection} from "../interfaces/dbconnection";
 import "dotenv/config";
+import * as AWS from 'aws-sdk';
+import {setupConsumers} from "../consumers";
 
 export default class StartUp {
   private dbConnection: DbConnection;
@@ -18,8 +20,10 @@ export default class StartUp {
     this.dbConnection = dbConnection;
     this.app = express();
 
+    this.initAWS();
     this.middler();
     this.initRoutes();
+    setupConsumers(this.dbConnection);
   }
 
   enableCors() {
@@ -34,8 +38,17 @@ export default class StartUp {
   middler() {
     this.enableCors();
     this.app.use(bodyParser.json());
-    this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(bodyParser.urlencoded({extended: false}));
     this.app.use(compression());
+  }
+
+  initAWS() {
+    const credentials = new AWS.Credentials({
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_KEY,
+    });
+
+    AWS.config.update({region: process.env.AWS_REGION || "us-east-1", credentials: credentials});
   }
 
   initRoutes() {

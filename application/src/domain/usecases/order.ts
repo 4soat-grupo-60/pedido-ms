@@ -5,7 +5,7 @@ import {OrderItem} from "../entities/orderItem";
 import {Payment} from "../entities/payment";
 import {PaymentStatus} from "../value_object/paymentStatus";
 import ProductInactiveError from "../error/ProductInactiveError";
-import {IOrderGateway, IPaymentGateway, IProductGateway} from "../../interfaces/gateways";
+import {IOrderGateway, IOrderSagaSender, IPaymentGateway, IProductGateway} from "../../interfaces/gateways";
 import {OrderItemInput} from "../value_object/orderItemInput";
 import {CPF} from "../value_object/cpf";
 
@@ -13,7 +13,8 @@ export class OrderUseCases {
   static async save(
     requestItems: Array<OrderItemInput>,
     orderGateway: IOrderGateway,
-    productGateway: IProductGateway
+    productGateway: IProductGateway,
+    orderSagaSender: IOrderSagaSender
   ): Promise<Order> {
     // Find all related products
     const products = await productGateway.getProductByIDs(
@@ -41,7 +42,11 @@ export class OrderUseCases {
 
     const order = new Order(items);
 
-    return await orderGateway.save(order);
+    const orderSaved = await orderGateway.save(order);
+
+    await orderSagaSender.send("order_created", orderSaved);
+
+    return orderSaved;
   }
 
   static async updatePayment(
@@ -52,10 +57,17 @@ export class OrderUseCases {
   ): Promise<Order> {
     const order = await orderGateway.getOrderByID(orderId);
     const payment = await paymentGateway.get(paymentId);
+    return this.processUpdatePayment(payment, order, orderGateway)
+  }
+
+  static async processUpdatePayment(
+    payment: Payment,
+    order: Order,
+    orderGateway: IOrderGateway,
+  ): Promise<Order> {
     order.setPaymentId(payment.id);
     order.setPaymentDate(payment.paidAt);
     order.setStatus(this.getOrderStatusByPayment(payment));
-
     return await orderGateway.update(order);
   }
 
