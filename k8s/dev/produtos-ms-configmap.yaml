@@ -9,4 +9,7 @@ data:
   PGDATA: /application/postgres
   POSTGRES_HOST_AUTH_METHOD: trust
   DATABASE_URL: "postgresql://pedidos-ms:pedidos-ms@pedidos-ms-postgres:5432/pedidos-ms"
-  PORT: "8080"
+  API_GATEWAY_LAMBDA_COGNITO: "https://1r8kzbgt4h.execute-api.us-east-1.amazonaws.com/Prod"
+  PORT: "3000"
+  PAYMENT_API_URL: "http://payment-ms"
+  PRODUCT_API_URL: "http://produtos-ms"
