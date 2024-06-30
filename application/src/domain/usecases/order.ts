@@ -1,13 +1,18 @@
-import {Order} from "../entities/order";
+import { Order } from "../entities/order";
 import RecordNotFoundError from "../error/RecordNotFoundError";
-import {OrderStatus} from "../value_object/orderStatus";
-import {OrderItem} from "../entities/orderItem";
-import {Payment} from "../entities/payment";
-import {PaymentStatus} from "../value_object/paymentStatus";
+import { OrderStatus } from "../value_object/orderStatus";
+import { OrderItem } from "../entities/orderItem";
+import { Payment } from "../entities/payment";
+import { PaymentStatus } from "../value_object/paymentStatus";
 import ProductInactiveError from "../error/ProductInactiveError";
-import {IOrderGateway, IOrderSagaSender, IPaymentGateway, IProductGateway} from "../../interfaces/gateways";
-import {OrderItemInput} from "../value_object/orderItemInput";
-import {CPF} from "../value_object/cpf";
+import {
+  IOrderGateway,
+  IOrderSagaSender,
+  IPaymentGateway,
+  IProductGateway,
+} from "../../interfaces/gateways";
+import { OrderItemInput } from "../value_object/orderItemInput";
+import { CPF } from "../value_object/cpf";
 
 export class OrderUseCases {
   static async save(
@@ -53,17 +58,17 @@ export class OrderUseCases {
     orderId: number,
     paymentId: string,
     orderGateway: IOrderGateway,
-    paymentGateway: IPaymentGateway,
+    paymentGateway: IPaymentGateway
   ): Promise<Order> {
     const order = await orderGateway.getOrderByID(orderId);
     const payment = await paymentGateway.get(paymentId);
-    return this.processUpdatePayment(payment, order, orderGateway)
+    return this.processUpdatePayment(payment, order, orderGateway);
   }
 
   static async processUpdatePayment(
     payment: Payment,
     order: Order,
-    orderGateway: IOrderGateway,
+    orderGateway: IOrderGateway
   ): Promise<Order> {
     order.setPaymentId(payment.id);
     order.setPaymentDate(payment.paidAt);
@@ -98,11 +103,14 @@ export class OrderUseCases {
   static async updateOrderStatus(
     orderID: number,
     status: OrderStatus,
-    orderGateway: IOrderGateway
+    orderGateway: IOrderGateway,
+    orderSagaSender: IOrderSagaSender
   ): Promise<Order> {
     const order: Order = await orderGateway.getOrderByID(orderID);
 
     order.setStatus(status);
+
+    await orderSagaSender.send("order_updated", order);
 
     return await orderGateway.update(order);
   }
@@ -132,3 +140,4 @@ export class OrderUseCases {
     return orderGateway.getOrdersOrdered();
   }
 }
+
