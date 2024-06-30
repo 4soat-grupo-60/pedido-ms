@@ -1,8 +1,8 @@
-import { Order } from "../../domain/entities/order";
-import { CPF } from "../../domain/value_object/cpf";
+import {Order} from "../../domain/entities/order";
+import {CPF} from "../../domain/value_object/cpf";
 import OrderModel from "../repositories/model/order.model";
 import OrderItemModelMapper from "./order_item.mapper";
-import PaymentModelMapper from "./payment.mapper";
+import OrderMessageModel from "../services/model/order.message.model";
 
 export default class OrderModelMapper {
   static map(d: OrderModel): Order {
@@ -17,5 +17,19 @@ export default class OrderModelMapper {
       d.created_at,
       d.updated_at
     );
+  }
+
+  static toMessage(d: Order): OrderMessageModel {
+    return {
+      id: d.id,
+      client_cpf: d.clientCPF?.getCPF(),
+      items: d.items.map(OrderItemModelMapper.toMessage),
+      payment_date: d.paymentDate,
+      payment_id: d.paymentId,
+      status: d.status.getStatus(),
+      total: d.valueTotal.getValueMoney(),
+      created_at: d.createdAt,
+      updated_at: d.updatedAt
+    }
   }
 }
