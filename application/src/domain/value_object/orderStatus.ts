@@ -12,7 +12,7 @@ export class OrderStatus {
   static EM_PREPARACAO: OrderStatus = new OrderStatus("Em preparação");
   static PRONTO: OrderStatus = new OrderStatus("Pronto");
   static ENTREGUE: OrderStatus = new OrderStatus("Entregue");
-  static PENDING: OrderStatus = new OrderStatus("Pending");
+  static PENDENTE: OrderStatus = new OrderStatus("Pending");
 
   private status: string;
 
@@ -26,7 +26,7 @@ export class OrderStatus {
       OrderStatus.EM_PREPARACAO,
       OrderStatus.PRONTO,
       OrderStatus.ENTREGUE,
-      OrderStatus.PENDING,
+      OrderStatus.PENDENTE,
     ];
 
     //@ts-ignore
