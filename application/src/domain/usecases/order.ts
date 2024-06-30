@@ -110,9 +110,11 @@ export class OrderUseCases {
 
     order.setStatus(status);
 
+    const update_status = await orderGateway.update(order);
+
     await orderSagaSender.send("order_updated", order);
 
-    return await orderGateway.update(order);
+    return update_status;
   }
 
   static async linkToClient(
