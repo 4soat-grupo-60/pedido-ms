@@ -8,7 +8,7 @@ import OrderRoute from "./routes/OrderRoute";
 import OrderQueueRoute from "./routes/OrderQueueRoute";
 import {DbConnection} from "../interfaces/dbconnection";
 import "dotenv/config";
-
+import axios from "axios";
 export default class StartUp {
   private dbConnection: DbConnection;
 
@@ -44,14 +44,24 @@ export default class StartUp {
       new OrderQueueRoute(this.dbConnection),
     ];
 
-    let port = process.env.PORT || 8080;
+    let port = process.env.PORT || 3000;
 
     for (let route of routes) {
       route.setup(this.app);
     }
 
     this.app.route("/ping").get((req, res) => {
-      res.send("pong");
+      res.send("pedidos");
+    });
+
+
+    this.app.route("/ping-produtos").get(async (req, res) => {
+      try {
+        const response = await axios.get(`${process.env.PRODUCT_API_URL}/ping`);
+        res.send(`Response from produtos-ms: ${response.data}`);
+      } catch (error) {
+        res.status(500).send(`Error: ${error.message}`);
+      }
     });
 
     // this.app.use(
