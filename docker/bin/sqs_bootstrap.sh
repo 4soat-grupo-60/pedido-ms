@@ -13,4 +13,6 @@ create_queue() {
 }
 
 # fila de envio de atualizações sobre pedidos
-create_queue "totem-pedido-queue"
+create_queue "order-queue"
+create_queue "payment-queue"
+create_queue "customer-queue"
