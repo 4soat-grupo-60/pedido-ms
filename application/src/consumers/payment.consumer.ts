@@ -10,12 +10,24 @@ export class PaymentConsumer implements IMessageConsumer<any> {
 
   async consume(saga: string, payload: SagaMessageModel<any>): Promise<boolean> {
     console.log("processing:", saga, payload)
+    
+    switch (saga) {
+      case "payment_created":
+      case "payment_updated":
+        return await this.handlePaymentCreateUpdateSaga(saga, payload);
+      default:
+        return false;
+    }
+
+  }
+
+  private async handlePaymentCreateUpdateSaga(saga: string, payload: SagaMessageModel<any>): Promise<boolean> {
 
     try {
-      
+
       await OrderController.updatePayment(
-        payload.payload.orderId,
-        payload.payload.paymentId,
+        payload.payload.order_id,
+        payload.payload.id,
         this.dbConnection
       )
 
@@ -27,5 +39,4 @@ export class PaymentConsumer implements IMessageConsumer<any> {
       return false;
     }
   }
-
 }
