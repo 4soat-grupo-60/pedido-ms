@@ -1,6 +1,6 @@
 import {SQS} from "aws-sdk";
 import * as AWS from "aws-sdk";
-import {SagaMessageModel} from "./model/saga.message.model";
+import {SagaMessageModel} from "../../interfaces/saga.message.model";
 import {IMessageConsumer} from "../../interfaces/gateways";
 
 export class SagaSQSConsumer {

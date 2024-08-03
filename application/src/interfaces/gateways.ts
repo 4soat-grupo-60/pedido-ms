@@ -5,7 +5,7 @@ import { Category } from "../domain/value_object/category";
 import { OrderStatus } from "../domain/value_object/orderStatus";
 import { PaymentGatewayResponse } from "../domain/value_object/paymentGatewayResponse";
 import { PaymentStatus } from "../domain/value_object/paymentStatus";
-import {SagaMessageModel} from "../gateways/services/model/saga.message.model";
+import {SagaMessageModel} from "./saga.message.model";
 import {OrderSaga} from "../gateways/services/order_saga_sender";
 
 export interface IOrderGateway {
@@ -14,6 +14,7 @@ export interface IOrderGateway {
   save(order: Order): Promise<Order>;
   update(order: Order): Promise<Order>;
   getOrderByID(orderID: number): Promise<Order | null>;
+  anonymizeClientData(cpf: string): Promise<Order[] | null>;
   getOrderByStatus(order: OrderStatus): Promise<Array<Order>>;
 }
 

@@ -26,6 +26,10 @@ export class PaymentStatus {
   isPaid() {
     return this.status == PaymentStatus.PAGO;
   }
+
+  isCancelled() {
+    return this.status == PaymentStatus.CANCELADO;
+  }
 }
 
 const validate = (message: string) => {

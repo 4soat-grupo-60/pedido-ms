@@ -133,4 +133,39 @@ export class OrderGateway implements IOrderGateway {
 
     return OrderModelMapper.map(order);
   }
+
+  async anonymizeClientData(cpf: string): Promise<Order[] | null> {
+
+    // Getting the existing orders associated to the CPF
+    const ordersIds = await this.repositoryData.order.findMany({
+      where: {
+        client_cpf: {
+          equals: cpf,
+        },
+      },
+      select: {
+        id: true
+      }
+    });
+
+    // Updating existing orders with the specified CPF to an anonymous data
+    await this.repositoryData.$executeRawUnsafe(
+      "UPDATE orders SET client_cpf = 'deleted_user' WHERE client_cpf = $1",
+      cpf
+    );
+
+    // Loading the CPF related orders
+    const orders: OrderModel[] = await this.repositoryData.order.findMany({
+      where: {
+        id: {
+          in: ordersIds.map((i) => i.id),
+        },
+      },
+      include: {
+        items: true,
+      },
+    });
+
+    return orders.map(OrderModelMapper.map);
+  }
 }
