@@ -1,5 +1,5 @@
 import {ISagaQueue} from "../../interfaces/gateways";
-import {SagaMessageModel} from "./model/saga.message.model";
+import {SagaMessageModel} from "../../interfaces/saga.message.model";
 
 import * as AWS from 'aws-sdk';
 import {SQS} from "aws-sdk";

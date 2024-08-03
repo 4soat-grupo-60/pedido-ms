@@ -1,13 +1,13 @@
-import { OrderGateway } from "../gateways/repositories/orders";
-import { OrderUseCases } from "../domain/usecases/order";
-import { OrderItemInput } from "../domain/value_object/orderItemInput";
-import { DbConnection } from "../interfaces/dbconnection";
-import { OrderStatus } from "../domain/value_object/orderStatus";
-import { OrderPresenter } from "./presenters/order.presenter";
-import { PaymentClient } from "../gateways/services/payment_client";
-import { ProductClient } from "../gateways/services/product_client";
-import { OrderSagaSender } from "../gateways/services/order_saga_sender";
-import { SagaSQSSender } from "../gateways/services/saga_sqs_sender";
+import {OrderGateway} from "../gateways/repositories/orders";
+import {OrderUseCases} from "../domain/usecases/order";
+import {OrderItemInput} from "../domain/value_object/orderItemInput";
+import {DbConnection} from "../interfaces/dbconnection";
+import {OrderStatus} from "../domain/value_object/orderStatus";
+import {OrderPresenter} from "./presenters/order.presenter";
+import {PaymentClient} from "../gateways/services/payment_client";
+import {ProductClient} from "../gateways/services/product_client";
+import {OrderSagaSender} from "../gateways/services/order_saga_sender";
+import {SagaSQSSender} from "../gateways/services/saga_sqs_sender";
 
 export class OrderController {
   static async getAllOrdersOrdered(dbConnection: DbConnection) {
@@ -30,16 +30,18 @@ export class OrderController {
     return OrderPresenter.map(order);
   }
 
-  static async linkClientToOrder(
+  static async linkCustomerToOrder(
     orderId: number,
     clientCPF: string,
     dbConnection: DbConnection
   ) {
     const orderGateway = new OrderGateway(dbConnection);
-    const order = await OrderUseCases.linkToClient(
+    const sagaSender = new OrderSagaSender(new SagaSQSSender());
+    const order = await OrderUseCases.linkCustomer(
       orderId,
       orderGateway,
-      clientCPF
+      sagaSender,
+      clientCPF,
     );
 
     return OrderPresenter.map(order);
@@ -70,12 +72,14 @@ export class OrderController {
   ) {
     const orderGateway = new OrderGateway(dbConnection);
     const paymentGateway = new PaymentClient();
+    const sagaSender = new OrderSagaSender(new SagaSQSSender());
 
     const newOrder = await OrderUseCases.updatePayment(
       orderId,
       paymentId,
       orderGateway,
-      paymentGateway
+      paymentGateway,
+      sagaSender
     );
 
     return OrderPresenter.map(newOrder);
@@ -87,7 +91,6 @@ export class OrderController {
     dbConnection: DbConnection
   ) {
     const orderGateway = new OrderGateway(dbConnection);
-
     const sagaSender = new OrderSagaSender(new SagaSQSSender());
 
     const order = await OrderUseCases.updateOrderStatus(
@@ -98,6 +101,17 @@ export class OrderController {
     );
 
     return OrderPresenter.map(order);
+  }
+
+  static async anonymizeCustomer(cpf: string, dbConnection: DbConnection) {
+    const orderGateway = new OrderGateway(dbConnection);
+    const sagaSender = new OrderSagaSender(new SagaSQSSender());
+
+    await OrderUseCases.anonymizeCustomer(
+      orderGateway,
+      sagaSender,
+      cpf
+    )
   }
 }
 

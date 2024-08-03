@@ -2,7 +2,7 @@ import {IOrderSagaSender, ISagaQueue} from "../../interfaces/gateways";
 import {Order} from "../../domain/entities/order";
 import OrderMessageModel from "./model/order.message.model";
 import OrderModelMapper from "../mapper/order.mapper";
-import {SagaMessageModel} from "./model/saga.message.model";
+import {SagaMessageModel} from "../../interfaces/saga.message.model";
 import * as crypto from "crypto";
 
 export type OrderSaga = "order_created" | "order_updated" | "order_client_link";

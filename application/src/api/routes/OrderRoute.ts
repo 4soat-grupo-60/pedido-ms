@@ -80,7 +80,7 @@ export default class OrderRoute implements IAppRoute {
               throw new Error("Cliente não encontrado");
             });
 
-          const order = await OrderController.linkClientToOrder(
+          const order = await OrderController.linkCustomerToOrder(
             orderId,
             clientCpfFormatted,
             this.dbConnection

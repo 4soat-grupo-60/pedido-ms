@@ -38,6 +38,10 @@ export class OrderStatus {
   getStatus(): string {
     return this.status;
   }
+
+  isCancelled() {
+    return this.status == OrderStatus.CANCELADO.status;
+  }
 }
 
 const validate = () => {

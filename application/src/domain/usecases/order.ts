@@ -1,9 +1,9 @@
-import { Order } from "../entities/order";
+import {Order} from "../entities/order";
 import RecordNotFoundError from "../error/RecordNotFoundError";
-import { OrderStatus } from "../value_object/orderStatus";
-import { OrderItem } from "../entities/orderItem";
-import { Payment } from "../entities/payment";
-import { PaymentStatus } from "../value_object/paymentStatus";
+import {OrderStatus} from "../value_object/orderStatus";
+import {OrderItem} from "../entities/orderItem";
+import {Payment} from "../entities/payment";
+import {PaymentStatus} from "../value_object/paymentStatus";
 import ProductInactiveError from "../error/ProductInactiveError";
 import {
   IOrderGateway,
@@ -11,8 +11,8 @@ import {
   IPaymentGateway,
   IProductGateway,
 } from "../../interfaces/gateways";
-import { OrderItemInput } from "../value_object/orderItemInput";
-import { CPF } from "../value_object/cpf";
+import {OrderItemInput} from "../value_object/orderItemInput";
+import {CPF} from "../value_object/cpf";
 
 export class OrderUseCases {
   static async save(
@@ -58,31 +58,33 @@ export class OrderUseCases {
     orderId: number,
     paymentId: string,
     orderGateway: IOrderGateway,
-    paymentGateway: IPaymentGateway
+    paymentGateway: IPaymentGateway,
+    orderSagaSender: IOrderSagaSender
   ): Promise<Order> {
     const order = await orderGateway.getOrderByID(orderId);
     const payment = await paymentGateway.get(paymentId);
-    return this.processUpdatePayment(payment, order, orderGateway);
+    return this.processUpdatePayment(payment, order, orderGateway, orderSagaSender);
   }
 
   static async processUpdatePayment(
     payment: Payment,
     order: Order,
-    orderGateway: IOrderGateway
+    orderGateway: IOrderGateway,
+    orderSagaSender: IOrderSagaSender
   ): Promise<Order> {
+
+    if (payment.status.isCancelled() && order.status.isCancelled()) {
+      return order;
+    }
+
     order.setPaymentId(payment.id);
     order.setPaymentDate(payment.paidAt);
     order.setStatus(this.getOrderStatusByPayment(payment));
-    return await orderGateway.update(order);
-  }
+    const updatedOrder = await orderGateway.update(order);
 
-  private static getOrderStatusByPayment(payment: Payment): OrderStatus {
-    switch (payment.status.value()) {
-      case PaymentStatus.PAGO:
-        return OrderStatus.AGUARDANDO_PREPARO;
-      default:
-        return OrderStatus.AGUARDANDO_PAGAMENTO;
-    }
+    await this.publishUpdate(updatedOrder, orderSagaSender);
+
+    return updatedOrder;
   }
 
   static async getOrderByID(
@@ -110,17 +112,18 @@ export class OrderUseCases {
 
     order.setStatus(status);
 
-    const update_status = await orderGateway.update(order);
+    const orderUpdated = await orderGateway.update(order);
 
-    await orderSagaSender.send("order_updated", order);
+    await this.publishUpdate(orderUpdated, orderSagaSender)
 
-    return update_status;
+    return orderUpdated;
   }
 
-  static async linkToClient(
+  static async linkCustomer(
     orderId: number,
     orderGateway: IOrderGateway,
-    clientCPF?: string
+    orderSagaSender: IOrderSagaSender,
+    clientCPF?: string,
   ): Promise<Order> {
     const order: Order = await orderGateway.getOrderByID(orderId);
 
@@ -129,7 +132,25 @@ export class OrderUseCases {
     }
     order.setStatus(OrderStatus.AGUARDANDO_PAGAMENTO);
 
-    return await orderGateway.update(order);
+    const updatedOrder = await orderGateway.update(order);
+
+    await this.publishUpdate(updatedOrder, orderSagaSender)
+
+    return updatedOrder;
+  }
+
+  static async anonymizeCustomer(
+    orderGateway: IOrderGateway,
+    orderSagaSender: IOrderSagaSender,
+    clientCPF: string,
+  ) {
+    const relatedOrders = await orderGateway.anonymizeClientData(clientCPF)
+
+    console.log("Related orders count: ", relatedOrders.length)
+
+    for (let relatedOrder of relatedOrders) {
+      await this.publishUpdate(relatedOrder, orderSagaSender)
+    }
   }
 
   static async listAll(orderGateway: IOrderGateway): Promise<Array<Order>> {
@@ -140,6 +161,22 @@ export class OrderUseCases {
     orderGateway: IOrderGateway
   ): Promise<Array<Order>> {
     return orderGateway.getOrdersOrdered();
+  }
+
+  private static getOrderStatusByPayment(payment: Payment): OrderStatus {
+    switch (payment.status.value()) {
+      case PaymentStatus.PAGO:
+        return OrderStatus.AGUARDANDO_PREPARO;
+      case PaymentStatus.CANCELADO:
+      case PaymentStatus.RECUSADO:
+        return OrderStatus.CANCELADO;
+      default:
+        return OrderStatus.AGUARDANDO_PAGAMENTO;
+    }
+  }
+
+  private static async publishUpdate(updatedOrder: Order, orderSagaSender: IOrderSagaSender) {
+    await orderSagaSender.send("order_updated", updatedOrder);
   }
 }
 

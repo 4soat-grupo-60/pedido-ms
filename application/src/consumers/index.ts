@@ -1,10 +1,9 @@
 import {SagaSQSConsumer} from "../gateways/services/saga_sqs_consumer";
-import {OrderConsumer} from "./order.consumer";
+import {PaymentConsumer} from "./payment.consumer";
 import {DbConnection} from "../interfaces/dbconnection";
+import {CustomerConsumer} from "./customer.consumer";
 
 export function setupConsumers(db: DbConnection) {
-  new SagaSQSConsumer(process.env.AWS_PAYMENT_QUEUE, new OrderConsumer(db)).receiveMessages();
-  
-  // TODO: adicionar outros consumidores
-  // new SagaSQSConsumer(process.env.AWS_CUSTOMER_DELETED_QUEUE, new OrderConsumer()).receiveMessages(); 
+  new SagaSQSConsumer(process.env.AWS_PAYMENT_QUEUE, new PaymentConsumer(db)).receiveMessages();
+  new SagaSQSConsumer(process.env.AWS_CUSTOMER_DELETED_QUEUE, new CustomerConsumer(db)).receiveMessages();
 }
