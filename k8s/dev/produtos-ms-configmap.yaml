@@ -4,12 +4,18 @@ metadata:
   name: pedidos-ms-configmap
   namespace: totem
 data:
-  POSTGRES_USER: pedidos-ms
-  POSTGRES_DB: pedidos-ms
-  PGDATA: /application/postgres
-  POSTGRES_HOST_AUTH_METHOD: trust
+  POSTGRES_USER: "pedidos-ms"
+  POSTGRES_DB: "pedidos-ms"
+  PGDATA: "/application/postgres"
+  POSTGRES_HOST_AUTH_METHOD: "trust"
   DATABASE_URL: "postgresql://pedidos-ms:pedidos-ms@pedidos-ms-postgres:5432/pedidos-ms"
-  API_GATEWAY_LAMBDA_COGNITO: "https://1r8kzbgt4h.execute-api.us-east-1.amazonaws.com/Prod"
+  API_GATEWAY_LAMBDA_COGNITO: "https://9uud4c9amf.execute-api.us-east-1.amazonaws.com/Prod"
+  AWS_PAYMENT_QUEUE: "http://host.docker.internal:4566/000000000000/payment-queue"
+  AWS_CUSTOMER_QUEUE: "http://host.docker.internal:4566/000000000000/customer-queue"
+  AWS_ORDER_QUEUE: "http://host.docker.internal:4566/000000000000/order-queue"
+  AWS_SECRET_KEY: "test"
+  AWS_ACCESS_KEY_ID: "test"
+  AWS_ENDPOINT: "http://host.docker.internal:4566"
   PORT: "3000"
   PAYMENT_API_URL: "http://payment-ms"
   PRODUCT_API_URL: "http://produtos-ms"

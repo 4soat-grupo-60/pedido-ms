@@ -19,21 +19,21 @@ services:
     networks:
       - totem
 
-  pedidos-ms:
-    build:
-      context: .
-      dockerfile: docker/node/Dockerfile
-    container_name: pedidos-ms
-    volumes:
-      - ./docker/bin:/var/bin
-    command: sh -c "npm install && chown -R www-data:www-data /var/www"
-    ports:
-      - "3000:3000"
-    links:
-      -   pedidos-ms-postgres
-    networks:
-      - totem
-      - default
+#  pedidos-ms:
+#    build:
+#      context: .
+#      dockerfile: docker/node/Dockerfile
+#    container_name: pedidos-ms
+#    volumes:
+#      - ./docker/bin:/var/bin
+#    command: sh -c "npm install && chown -R www-data:www-data /var/www"
+#    ports:
+#      - "3000:3000"
+#    links:
+#      -   pedidos-ms-postgres
+#    networks:
+#      - totem
+#      - default
   
   localstack:
     container_name: pedido-ms-localstack
@@ -52,7 +52,7 @@ services:
       - default
 networks:
   totem:
-    external: true
+#    external: true
 volumes:
   dbdata:
     driver: local
