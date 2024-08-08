@@ -1,0 +1,4525 @@
+<!DOCTYPE html>
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>ZAP Scanning Report</title>
+<link href="order-request-2024-08-08/common.css"
+	rel="stylesheet" type="text/css">
+<link href="order-request-2024-08-08/technology.css" rel="stylesheet" type="text/css">
+<script src="order-request-2024-08-08/chart.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    function showHide(id) {
+        showHideElement(id + "reqh");
+        showHideElement(id + "reqb");
+        showHideElement(id + "resph");
+        showHideElement(id + "respb");
+    }
+    function showHideElement(id) {
+        var x = document.getElementById(id);
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
+<link rel="stylesheet" href="order-request-2024-08-08/chart.min.css">
+</head>
+<body>
+
+	
+		<div class="hero"></div>
+	
+
+	<header id="header">
+		<div class="wrap">
+			<div class="inner">
+				<h1>
+					<!-- The ZAP Logo -->
+					<img src="order-request-2024-08-08/zap32x32.png" alt="ZAP" />
+					ZAP Scanning Report
+				</h1>
+			</div>
+		</div>
+	</header>
+
+	<section id="segment-01" class="container">
+		<div class="wrap">
+			<div class="inner pt3">
+
+				
+
+				<h3>
+					Generated on Thu, 8 Aug 2024 08:25:05
+				</h3>
+
+				<h3>
+					ZAP Version: 2.15.0
+				</h3>
+
+				<h4>
+					ZAP is supported by the <a
+						href="https://crashoverride.com/?zap=rep">Crash Override Open
+						Source Fellowship</a>
+				</h4>
+
+				
+					<!--  Hidden divs just to allow us to get hold of the right CSS colors -->
+					<div class="risk-3-chart" style="display: none;"></div>
+					<div class="risk-2-chart" style="display: none;"></div>
+					<div class="risk-1-chart" style="display: none;"></div>
+					<div class="risk-0-chart" style="display: none;"></div>
+					<div class="chart-text-color" style="display: none;"></div>
+
+					<div class="summaryChartWrapper">
+						<canvas id="summaryChart" width="550" height="300"></canvas>
+						<script type="text/javascript">
+                            /*<![CDATA[*/
+                            var title = "Alert Chart";
+                            var labels = [
+                            "High",
+                            "Medium",
+                            "Low",
+                            "Informational"];
+                            var data = [
+                            null,
+                            1,
+                            2,
+                            1];
+                            /*]]>*/
+
+                            const fontColor = getComputedStyle(document
+                                    .querySelector('.chart-text-color')).color;
+
+                            var options = {
+                                responsive : true,
+                                legend : {
+                                    position : 'bottom',
+                                    labels : {
+                                        fontColor : fontColor,
+                                        padding : 30
+                                    }
+                                }
+                            }
+
+                            const chartHigh = getComputedStyle(document
+                                    .querySelector('.risk-3-chart')).backgroundColor;
+                            const chartMed = getComputedStyle(document
+                                    .querySelector('.risk-2-chart')).backgroundColor;
+                            const chartLow = getComputedStyle(document
+                                    .querySelector('.risk-1-chart')).backgroundColor;
+                            const chartInfo = getComputedStyle(document
+                                    .querySelector('.risk-0-chart')).backgroundColor;
+
+                            new Chart(document.getElementById("summaryChart"),
+                                    {
+                                        type : "doughnut",
+                                        data : {
+                                            labels : labels,
+                                            datasets : [ {
+                                                label : title,
+                                                data : data,
+                                                fill : false,
+                                                backgroundColor : [ chartHigh,
+                                                        chartMed, chartLow,
+                                                        chartInfo ],
+                                                borderWidth : 0
+                                            } ]
+                                        },
+                                        options : options
+                                    });
+                        </script>
+					</div>
+				
+
+				
+					<h3 class="left-header">Summary of Alerts</h3>
+					<div class="tableWrapper">
+						<table class="summary" cellspacing="0" cellpadding="0">
+							<tr>
+								<th width="45%"
+									height="24">Risk Level</th>
+								<th width="55%"
+									align="center">Number of Alerts</th>
+							</tr>
+							<tr>
+								<td class="risk-3">
+									<div>High</div>
+								</td>
+								<td align="center">
+									<div>0</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="risk-2">
+									<div>Medium</div>
+								</td>
+								<td align="center">
+									<div>1</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="risk-1">
+									<div>Low</div>
+								</td>
+								<td align="center">
+									<div>2</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="risk-0">
+									<div>Informational</div>
+								</td>
+								<td align="center">
+									<div>1</div>
+								</td>
+							</tr>
+							
+						</table>
+					</div>
+					<div class="spacer-lg"></div>
+				
+
+			</div>
+		</div>
+	</section>
+
+	
+	
+	
+		<div></div>
+	
+
+	<section id="segment-02" class="container">
+		<div class="wrap">
+			<div class="inner">
+
+				
+					<h3>Alerts</h3>
+					<div class="tableWrapper">
+						<table class="alerts" cellspacing="0" cellpadding="0">
+							<tr>
+								<th width="60%" height="24">Name</th>
+								<th width="20%"
+									align="center">Risk Level</th>
+								<th width="20%"
+									align="center">Number of Instances</th>
+							</tr>
+							<tr>
+								<td><a href="#plugin-10098">Cross-Domain Misconfiguration</a></td>
+								<td align="center" class="risk-2">Medium</td>
+								<td align="center">1</td>
+							</tr>
+							<tr>
+								<td><a href="#plugin-10037">Server Leaks Information via &quot;X-Powered-By&quot; HTTP Response Header Field(s)</a></td>
+								<td align="center" class="risk-1">Low</td>
+								<td align="center">1</td>
+							</tr>
+							<tr>
+								<td><a href="#plugin-10021">X-Content-Type-Options Header Missing</a></td>
+								<td align="center" class="risk-1">Low</td>
+								<td align="center">1</td>
+							</tr>
+							<tr>
+								<td><a href="#plugin-10104">User Agent Fuzzer</a></td>
+								<td align="center" class="risk-0">Informational</td>
+								<td align="center">12</td>
+							</tr>
+						</table>
+					</div>
+				
+
+			</div>
+		</div>
+	</section>
+
+	<section id="segment-03" class="container">
+		<div class="wrap">
+			<div class="inner">
+
+				
+					<h3>Passing Rules</h3>
+					<div class="tableWrapper">
+						<table class="alerts" cellspacing="0" cellpadding="0">
+							<tr>
+								<th width="55%" height="24">Name</th>
+								<th width="15%"
+									align="center">Rule Type</th>
+								<th width="15%"
+									align="center">Threshold</th>
+								<th width="15%"
+									align="center">Strength</th>
+							</tr>
+							
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/0/">Directory Browsing</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40003/">CRLF Injection</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/6/">Path Traversal</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/7/">Remote File Inclusion</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40008/">Parameter Tampering</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40009/">Server Side Include</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10058/">GET for POST</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40012/">Cross Site Scripting (Reflected)</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40014/">Cross Site Scripting (Persistent)</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/50000/">Script Active Scan Rules</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40016/">Cross Site Scripting (Persistent) - Prime</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40017/">Cross Site Scripting (Persistent) - Spider</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40018/">SQL Injection</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40019/">SQL Injection - MySQL</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40020/">SQL Injection - Hypersonic SQL</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40021/">SQL Injection - Oracle</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40022/">SQL Injection - PostgreSQL</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40024/">SQL Injection - SQLite</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40026/">Cross Site Scripting (DOM Based)</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40027/">SQL Injection - MsSQL</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40028/">ELMAH Information Leak</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40029/">Trace.axd Information Leak</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90017/">XSLT Injection</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40032/">.htaccess Information Leak</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40034/">.env Information Leak</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90019/">Server Side Code Injection</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40035/">Hidden File Finder</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90021/">XPath Injection</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90020/">Remote OS Command Injection</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90023/">XML External Entity Attack</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90024/">Generic Padding Oracle</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40042/">Spring Actuator Information Leak</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90026/">SOAP Action Spoofing</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40043/">Log4Shell</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90029/">SOAP XML Injection</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/40045/">Spring4Shell</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/20015/">Heartbleed OpenSSL Vulnerability</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/30001/">Buffer Overflow</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/20017/">Source Code Disclosure - CVE-2012-1823</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/30002/">Format String Error</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90035/">Server Side Template Injection</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/20018/">Remote Code Execution - CVE-2012-1823</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90034/">Cloud Metadata Potentially Exposed</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/20019/">External Redirect</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90036/">Server Side Template Injection (Blind)</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+									
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10045/">Source Code Disclosure - /WEB-INF Folder</a></td>
+										<td align="center">Active</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">MEDIUM</td>
+									</tr>
+								
+							
+							
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10112/">Session Management Response Identified</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10113/">Verification Request Identified</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/2/">Private IP Disclosure</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/3/">Session ID in URL Rewrite</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90001/">Insecure JSF ViewState</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10003/">Vulnerable JS Library (Powered by Retire.js)</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90011/">Charset Mismatch</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10010/">Cookie No HttpOnly Flag</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10011/">Cookie Without Secure Flag</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10015/">Re-examine Cache-control Directives</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10017/">Cross-Domain JavaScript Source File Inclusion</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10019/">Content-Type Header Missing</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10020/">Anti-clickjacking Header</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90022/">Application Error Disclosure</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10023/">Information Disclosure - Debug Error Messages</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10024/">Information Disclosure - Sensitive Information in URL</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10025/">Information Disclosure - Sensitive Information in HTTP Referrer Header</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10027/">Information Disclosure - Suspicious Comments</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10028/">Open Redirect</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10029/">Cookie Poisoning</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10030/">User Controllable Charset</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10031/">User Controllable HTML Element Attribute (Potential XSS)</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90030/">WSDL File Detection</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/90033/">Loosely Scoped Cookie</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10032/">Viewstate</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10033/">Directory Browsing</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10034/">Heartbleed OpenSSL Vulnerability (Indicative)</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10035/">Strict-Transport-Security Header</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10036/">HTTP Server Response Header</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10038/">Content Security Policy (CSP) Header Not Set</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10039/">X-Backend-Server Header Information Leak</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10040/">Secure Pages Include Mixed Content</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10041/">HTTP to HTTPS Insecure Transition in Form Post</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10042/">HTTPS to HTTP Insecure Transition in Form Post</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10043/">User Controllable JavaScript Event (XSS)</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10044/">Big Redirect Detected (Potential Sensitive Information Leak)</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10050/">Retrieved from Cache</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10052/">X-ChromeLogger-Data (XCOLD) Header Information Leak</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10054/">Cookie without SameSite Attribute</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10055/">CSP</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10056/">X-Debug-Token Information Leak</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10057/">Username Hash Found</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10061/">X-AspNet-Version Response Header</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10062/">PII Disclosure</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/50001/">Script Passive Scan Rules</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/50003/">Stats Passive Scan Rule</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10202/">Absence of Anti-CSRF Tokens</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10096/">Timestamp Disclosure</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10097/">Hash Disclosure</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10105/">Weak Authentication Method</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10108/">Reverse Tabnabbing</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10109/">Modern Web Application</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+									<tr>
+										<td><a
+											href="https://www.zaproxy.org/docs/alerts/10111/">Authentication Request Identified</a></td>
+										<td align="center">Passive</td>
+										<td align="center">MEDIUM</td>
+										<td align="center">-</td>
+									</tr>
+								
+							
+						</table>
+					</div>
+				
+
+			</div>
+		</div>
+	</section>
+
+	<section id="segment-04" class="container">
+		<div class="wrap">
+			<div class="inner">
+
+				<h2>Sites</h2>
+				
+					<h3>http://localhost:3000</h3>
+					
+						<div class="tableWrapper">
+							<table class="summary" cellspacing="0" cellpadding="0">
+								<tr>
+									<th width="45%" height="24">HTTP Response Code</th>
+									<th width="55%" align="center">Number of Responses</th>
+								</tr>
+
+								
+									<tr>
+										<td><a
+											href="https://developer.mozilla.org/docs/Web/HTTP/Status/404">404 Not Found</a>
+										</td>
+										<td align="center">
+											<div>676</div>
+										</td>
+									</tr>
+									
+								
+									<tr>
+										<td><a
+											href="https://developer.mozilla.org/docs/Web/HTTP/Status/200">200 OK</a>
+										</td>
+										<td align="center">
+											<div>76</div>
+										</td>
+									</tr>
+									
+								
+									<tr>
+										<td><a
+											href="https://developer.mozilla.org/docs/Web/HTTP/Status/500">500 Internal Server Error</a>
+										</td>
+										<td align="center">
+											<div>656</div>
+										</td>
+									</tr>
+									
+								
+							</table>
+						</div>
+
+						<h4>No Authentication Statistics Found</h4>
+						<div class="tableWrapper">
+							
+						</div>
+					
+					
+					
+						<div class="tableWrapper">
+							<table class="summary" cellspacing="0" cellpadding="0">
+								<tr>
+									<th>Parameter Name</th>
+									<th>Type</th>
+									<th>Flags</th>
+									<th>Times Used</th>
+									<th># Values</th>
+								</tr>
+								
+									<tr>
+										<td>
+											<div>Access-Control-Allow-Origin</div>
+										</td>
+										<td>
+											<div>Header</div>
+										</td>
+										<td></td>
+										<td>
+											<div>56</div>
+										</td>
+										<td>
+											<div>1</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>Connection</div>
+										</td>
+										<td>
+											<div>Header</div>
+										</td>
+										<td></td>
+										<td>
+											<div>56</div>
+										</td>
+										<td>
+											<div>1</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>Content-Length</div>
+										</td>
+										<td>
+											<div>Header</div>
+										</td>
+										<td></td>
+										<td>
+											<div>56</div>
+										</td>
+										<td>
+											<div>13</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>Content-Security-Policy</div>
+										</td>
+										<td>
+											<div>Header</div>
+										</td>
+										<td></td>
+										<td>
+											<div>1</div>
+										</td>
+										<td>
+											<div>1</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>Content-Type</div>
+										</td>
+										<td>
+											<div>Header</div>
+										</td>
+										<td></td>
+										<td>
+											<div>56</div>
+										</td>
+										<td>
+											<div>2</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>Date</div>
+										</td>
+										<td>
+											<div>Header</div>
+										</td>
+										<td></td>
+										<td>
+											<div>56</div>
+										</td>
+										<td>
+											<div>56</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>ETag</div>
+										</td>
+										<td>
+											<div>Header</div>
+										</td>
+										<td></td>
+										<td>
+											<div>55</div>
+										</td>
+										<td>
+											<div>12</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>Keep-Alive</div>
+										</td>
+										<td>
+											<div>Header</div>
+										</td>
+										<td></td>
+										<td>
+											<div>56</div>
+										</td>
+										<td>
+											<div>1</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>Vary</div>
+										</td>
+										<td>
+											<div>Header</div>
+										</td>
+										<td></td>
+										<td>
+											<div>56</div>
+										</td>
+										<td>
+											<div>1</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>X-Content-Type-Options</div>
+										</td>
+										<td>
+											<div>Header</div>
+										</td>
+										<td></td>
+										<td>
+											<div>1</div>
+										</td>
+										<td>
+											<div>1</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td>
+											<div>X-Powered-By</div>
+										</td>
+										<td>
+											<div>Header</div>
+										</td>
+										<td></td>
+										<td>
+											<div>56</div>
+										</td>
+										<td>
+											<div>1</div>
+										</td>
+									</tr>
+								
+
+							</table>
+						</div>
+					
+				
+
+				
+					<h3>Alert Detail</h3>
+					
+						<div class="tableWrapper">
+							<table class="results" cellspacing="0" cellpadding="0">
+								<tr height="24">
+									<th width="20%" class="risk-2"><a
+										id="plugin-10098"></a>
+										<div>Medium</div></th>
+									<th class="risk-2">Cross-Domain Misconfiguration</th>
+								</tr>
+								<tr>
+									<td width="20%">Description</td>
+									<td width="80%">
+											<div>Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server</div>
+											
+										</td>
+								</tr>
+								<TR vAlign="top">
+									<TD colspan="2"></TD>
+								</TR>
+								
+									<tr>
+										<td width="20%"
+											class="indent1">URL</td>
+										<td width="80%"><a href="http://localhost:3000/api/orders">http://localhost:3000/api/orders</a></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Method</td>
+										<td width="80%">POST</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Parameter</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Attack</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Evidence</td>
+										<td width="80%">Access-Control-Allow-Origin: *</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">
+											<div id="alert-190">
+												<a
+													onclick="showHide(&#39;alert-190&#39;);"
+													href="#190">Show / hide Request and Response</a>
+											</div>
+										</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Header
+											- size: 275 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-190reqh"
+												style="display: none;">
+												
+													POST http://localhost:3000/api/orders HTTP/1.1
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													User-Agent: PostmanRuntime/7.40.0
+													<br />
+												
+													Accept: */*
+													<br />
+												
+													Cache-Control: no-cache
+													<br />
+												
+													Postman-Token: 1e7e1e1a-d9d1-4f8f-9b38-03ff8d289387
+													<br />
+												
+													host: localhost:3000
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Content-Length: 258
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Body
+											- size: 258 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-190reqb"
+												style="display: none;">
+												
+													[
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c49d29720c67ee18ebc0&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:2
+													<br />
+												
+													    },
+													<br />
+												
+													        {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c4c629720c67ee18ebc3&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    },
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66ac1c172841e2912d2c64bd&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    }
+													<br />
+												
+													]
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Header
+											- size: 292 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-190resph"
+												style="display: none;">
+												
+													HTTP/1.1 200 OK
+													<br />
+												
+													X-Powered-By: Express
+													<br />
+												
+													Access-Control-Allow-Origin: *
+													<br />
+												
+													Content-Type: application/json; charset=utf-8
+													<br />
+												
+													Content-Length: 793
+													<br />
+												
+													ETag: W/&quot;319-XKPZBQ3DZ78Dy73+scqhmioWcrQ&quot;
+													<br />
+												
+													Vary: Accept-Encoding
+													<br />
+												
+													Date: Thu, 08 Aug 2024 11:22:13 GMT
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Keep-Alive: timeout=5
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Body
+											- size: 793 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-190respb"
+												style="display: none;">
+												
+													{&quot;client_cpf&quot;:null,&quot;payment&quot;:null,&quot;items&quot;:[{&quot;id&quot;:28,&quot;quantity&quot;:2,&quot;price&quot;:15,&quot;total&quot;:30,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c49d29720c67ee18ebc0&quot;,&quot;name&quot;:&quot;Hambúrguer Clássico&quot;,&quot;description&quot;:&quot;Hambúrguer de carne com queijo, alface, tomate e molho especial.&quot;,&quot;category&quot;:&quot;Lanche&quot;,&quot;price&quot;:15}},{&quot;id&quot;:29,&quot;quantity&quot;:1,&quot;price&quot;:5,&quot;total&quot;:5,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c4c629720c67ee18ebc3&quot;,&quot;name&quot;:&quot;Refrigerante Lata&quot;,&quot;description&quot;:&quot;Refrigerante de diversos sabores, lata de 350ml.&quot;,&quot;category&quot;:&quot;Bebida&quot;,&quot;price&quot;:5}},{&quot;id&quot;:30,&quot;quantity&quot;:1,&quot;price&quot;:12,&quot;total&quot;:12,&quot;product&quot;:{&quot;id&quot;:&quot;66ac1c172841e2912d2c64bd&quot;,&quot;name&quot;:&quot;Batata Frita com cheddar&quot;,&quot;description&quot;:&quot;Loren Ipsum&quot;,&quot;category&quot;:&quot;Acompanhamento&quot;,&quot;price&quot;:12}}],&quot;id&quot;:10,&quot;status&quot;:&quot;Criado&quot;,&quot;total&quot;:32,&quot;created_at&quot;:&quot;2024-08-08T11:22:13.079Z&quot;,&quot;updated_at&quot;:&quot;2024-08-08T11:22:13.079Z&quot;}
+													
+												
+											</div>
+										</td>
+									</tr>
+								
+								<tr>
+									<td width="20%">Instances</td>
+									<td width="80%">1</td>
+								</tr>
+								<tr>
+									<td width="20%">Solution</td>
+									<td width="80%">
+											<div>Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).</div>
+											<br />
+										
+											<div>Configure the &quot;Access-Control-Allow-Origin&quot; HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.</div>
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">Reference</td>
+									<td width="80%">
+											<a href="https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.html5_overly_permissive_cors_policy">https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.html5_overly_permissive_cors_policy</a>
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">Tags</td>
+									<td width="80%">
+
+											
+												<a href="https://owasp.org/www-project-top-ten/2017/A5_2017-Broken_Access_Control.html">OWASP_2017_A05</a>
+											
+											
+											<br />
+										
+
+											
+												<a href="https://cwe.mitre.org/data/definitions/264.html">CWE-264</a>
+											
+											
+											<br />
+										
+
+											
+												<a href="https://owasp.org/Top10/A01_2021-Broken_Access_Control/">OWASP_2021_A01</a>
+											
+											
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">CWE Id</td>
+									<td width="80%"><a
+										href="https://cwe.mitre.org/data/definitions/264.html">264</a></td>
+								</tr>
+								<tr>
+									<td width="20%">WASC Id</td>
+									<td width="80%">14</td>
+								</tr>
+								<tr>
+									<td width="20%">Plugin Id</td>
+									<td width="80%"><a
+										href="https://www.zaproxy.org/docs/alerts/10098/">10098</a></td>
+								</tr>
+							</table>
+						</div>
+						<div class="spacer"></div>
+					
+						<div class="tableWrapper">
+							<table class="results" cellspacing="0" cellpadding="0">
+								<tr height="24">
+									<th width="20%" class="risk-1"><a
+										id="plugin-10037"></a>
+										<div>Low</div></th>
+									<th class="risk-1">Server Leaks Information via &quot;X-Powered-By&quot; HTTP Response Header Field(s)</th>
+								</tr>
+								<tr>
+									<td width="20%">Description</td>
+									<td width="80%">
+											<div>The web/application server is leaking information via one or more &quot;X-Powered-By&quot; HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.</div>
+											
+										</td>
+								</tr>
+								<TR vAlign="top">
+									<TD colspan="2"></TD>
+								</TR>
+								
+									<tr>
+										<td width="20%"
+											class="indent1">URL</td>
+										<td width="80%"><a href="http://localhost:3000/api/orders">http://localhost:3000/api/orders</a></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Method</td>
+										<td width="80%">POST</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Parameter</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Attack</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Evidence</td>
+										<td width="80%">X-Powered-By: Express</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">
+											<div id="alert-192">
+												<a
+													onclick="showHide(&#39;alert-192&#39;);"
+													href="#192">Show / hide Request and Response</a>
+											</div>
+										</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Header
+											- size: 275 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-192reqh"
+												style="display: none;">
+												
+													POST http://localhost:3000/api/orders HTTP/1.1
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													User-Agent: PostmanRuntime/7.40.0
+													<br />
+												
+													Accept: */*
+													<br />
+												
+													Cache-Control: no-cache
+													<br />
+												
+													Postman-Token: 1e7e1e1a-d9d1-4f8f-9b38-03ff8d289387
+													<br />
+												
+													host: localhost:3000
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Content-Length: 258
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Body
+											- size: 258 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-192reqb"
+												style="display: none;">
+												
+													[
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c49d29720c67ee18ebc0&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:2
+													<br />
+												
+													    },
+													<br />
+												
+													        {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c4c629720c67ee18ebc3&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    },
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66ac1c172841e2912d2c64bd&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    }
+													<br />
+												
+													]
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Header
+											- size: 292 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-192resph"
+												style="display: none;">
+												
+													HTTP/1.1 200 OK
+													<br />
+												
+													X-Powered-By: Express
+													<br />
+												
+													Access-Control-Allow-Origin: *
+													<br />
+												
+													Content-Type: application/json; charset=utf-8
+													<br />
+												
+													Content-Length: 793
+													<br />
+												
+													ETag: W/&quot;319-XKPZBQ3DZ78Dy73+scqhmioWcrQ&quot;
+													<br />
+												
+													Vary: Accept-Encoding
+													<br />
+												
+													Date: Thu, 08 Aug 2024 11:22:13 GMT
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Keep-Alive: timeout=5
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Body
+											- size: 793 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-192respb"
+												style="display: none;">
+												
+													{&quot;client_cpf&quot;:null,&quot;payment&quot;:null,&quot;items&quot;:[{&quot;id&quot;:28,&quot;quantity&quot;:2,&quot;price&quot;:15,&quot;total&quot;:30,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c49d29720c67ee18ebc0&quot;,&quot;name&quot;:&quot;Hambúrguer Clássico&quot;,&quot;description&quot;:&quot;Hambúrguer de carne com queijo, alface, tomate e molho especial.&quot;,&quot;category&quot;:&quot;Lanche&quot;,&quot;price&quot;:15}},{&quot;id&quot;:29,&quot;quantity&quot;:1,&quot;price&quot;:5,&quot;total&quot;:5,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c4c629720c67ee18ebc3&quot;,&quot;name&quot;:&quot;Refrigerante Lata&quot;,&quot;description&quot;:&quot;Refrigerante de diversos sabores, lata de 350ml.&quot;,&quot;category&quot;:&quot;Bebida&quot;,&quot;price&quot;:5}},{&quot;id&quot;:30,&quot;quantity&quot;:1,&quot;price&quot;:12,&quot;total&quot;:12,&quot;product&quot;:{&quot;id&quot;:&quot;66ac1c172841e2912d2c64bd&quot;,&quot;name&quot;:&quot;Batata Frita com cheddar&quot;,&quot;description&quot;:&quot;Loren Ipsum&quot;,&quot;category&quot;:&quot;Acompanhamento&quot;,&quot;price&quot;:12}}],&quot;id&quot;:10,&quot;status&quot;:&quot;Criado&quot;,&quot;total&quot;:32,&quot;created_at&quot;:&quot;2024-08-08T11:22:13.079Z&quot;,&quot;updated_at&quot;:&quot;2024-08-08T11:22:13.079Z&quot;}
+													
+												
+											</div>
+										</td>
+									</tr>
+								
+								<tr>
+									<td width="20%">Instances</td>
+									<td width="80%">1</td>
+								</tr>
+								<tr>
+									<td width="20%">Solution</td>
+									<td width="80%">
+											<div>Ensure that your web server, application server, load balancer, etc. is configured to suppress &quot;X-Powered-By&quot; headers.</div>
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">Reference</td>
+									<td width="80%">
+											<a href="https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/01-Information_Gathering/08-Fingerprint_Web_Application_Framework">https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/01-Information_Gathering/08-Fingerprint_Web_Application_Framework</a>
+											<br />
+										
+											<a href="https://www.troyhunt.com/2012/02/shhh-dont-let-your-response-headers.html">https://www.troyhunt.com/2012/02/shhh-dont-let-your-response-headers.html</a>
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">Tags</td>
+									<td width="80%">
+
+											
+												<a href="https://owasp.org/Top10/A01_2021-Broken_Access_Control/">OWASP_2021_A01</a>
+											
+											
+											<br />
+										
+
+											
+												<a href="https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure.html">OWASP_2017_A03</a>
+											
+											
+											<br />
+										
+
+											
+												<a href="https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/01-Information_Gathering/08-Fingerprint_Web_Application_Framework">WSTG-v42-INFO-08</a>
+											
+											
+											<br />
+										
+
+											
+												<a href="https://cwe.mitre.org/data/definitions/200.html">CWE-200</a>
+											
+											
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">CWE Id</td>
+									<td width="80%"><a
+										href="https://cwe.mitre.org/data/definitions/200.html">200</a></td>
+								</tr>
+								<tr>
+									<td width="20%">WASC Id</td>
+									<td width="80%">13</td>
+								</tr>
+								<tr>
+									<td width="20%">Plugin Id</td>
+									<td width="80%"><a
+										href="https://www.zaproxy.org/docs/alerts/10037/">10037</a></td>
+								</tr>
+							</table>
+						</div>
+						<div class="spacer"></div>
+					
+						<div class="tableWrapper">
+							<table class="results" cellspacing="0" cellpadding="0">
+								<tr height="24">
+									<th width="20%" class="risk-1"><a
+										id="plugin-10021"></a>
+										<div>Low</div></th>
+									<th class="risk-1">X-Content-Type-Options Header Missing</th>
+								</tr>
+								<tr>
+									<td width="20%">Description</td>
+									<td width="80%">
+											<div>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to &#39;nosniff&#39;. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.</div>
+											
+										</td>
+								</tr>
+								<TR vAlign="top">
+									<TD colspan="2"></TD>
+								</TR>
+								
+									<tr>
+										<td width="20%"
+											class="indent1">URL</td>
+										<td width="80%"><a href="http://localhost:3000/api/orders">http://localhost:3000/api/orders</a></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Method</td>
+										<td width="80%">POST</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Parameter</td>
+										<td width="80%">x-content-type-options</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Attack</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Evidence</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">
+											<div id="alert-191">
+												<a
+													onclick="showHide(&#39;alert-191&#39;);"
+													href="#191">Show / hide Request and Response</a>
+											</div>
+										</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Header
+											- size: 275 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-191reqh"
+												style="display: none;">
+												
+													POST http://localhost:3000/api/orders HTTP/1.1
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													User-Agent: PostmanRuntime/7.40.0
+													<br />
+												
+													Accept: */*
+													<br />
+												
+													Cache-Control: no-cache
+													<br />
+												
+													Postman-Token: 1e7e1e1a-d9d1-4f8f-9b38-03ff8d289387
+													<br />
+												
+													host: localhost:3000
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Content-Length: 258
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Body
+											- size: 258 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-191reqb"
+												style="display: none;">
+												
+													[
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c49d29720c67ee18ebc0&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:2
+													<br />
+												
+													    },
+													<br />
+												
+													        {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c4c629720c67ee18ebc3&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    },
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66ac1c172841e2912d2c64bd&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    }
+													<br />
+												
+													]
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Header
+											- size: 292 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-191resph"
+												style="display: none;">
+												
+													HTTP/1.1 200 OK
+													<br />
+												
+													X-Powered-By: Express
+													<br />
+												
+													Access-Control-Allow-Origin: *
+													<br />
+												
+													Content-Type: application/json; charset=utf-8
+													<br />
+												
+													Content-Length: 793
+													<br />
+												
+													ETag: W/&quot;319-XKPZBQ3DZ78Dy73+scqhmioWcrQ&quot;
+													<br />
+												
+													Vary: Accept-Encoding
+													<br />
+												
+													Date: Thu, 08 Aug 2024 11:22:13 GMT
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Keep-Alive: timeout=5
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Body
+											- size: 793 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-191respb"
+												style="display: none;">
+												
+													{&quot;client_cpf&quot;:null,&quot;payment&quot;:null,&quot;items&quot;:[{&quot;id&quot;:28,&quot;quantity&quot;:2,&quot;price&quot;:15,&quot;total&quot;:30,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c49d29720c67ee18ebc0&quot;,&quot;name&quot;:&quot;Hambúrguer Clássico&quot;,&quot;description&quot;:&quot;Hambúrguer de carne com queijo, alface, tomate e molho especial.&quot;,&quot;category&quot;:&quot;Lanche&quot;,&quot;price&quot;:15}},{&quot;id&quot;:29,&quot;quantity&quot;:1,&quot;price&quot;:5,&quot;total&quot;:5,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c4c629720c67ee18ebc3&quot;,&quot;name&quot;:&quot;Refrigerante Lata&quot;,&quot;description&quot;:&quot;Refrigerante de diversos sabores, lata de 350ml.&quot;,&quot;category&quot;:&quot;Bebida&quot;,&quot;price&quot;:5}},{&quot;id&quot;:30,&quot;quantity&quot;:1,&quot;price&quot;:12,&quot;total&quot;:12,&quot;product&quot;:{&quot;id&quot;:&quot;66ac1c172841e2912d2c64bd&quot;,&quot;name&quot;:&quot;Batata Frita com cheddar&quot;,&quot;description&quot;:&quot;Loren Ipsum&quot;,&quot;category&quot;:&quot;Acompanhamento&quot;,&quot;price&quot;:12}}],&quot;id&quot;:10,&quot;status&quot;:&quot;Criado&quot;,&quot;total&quot;:32,&quot;created_at&quot;:&quot;2024-08-08T11:22:13.079Z&quot;,&quot;updated_at&quot;:&quot;2024-08-08T11:22:13.079Z&quot;}
+													
+												
+											</div>
+										</td>
+									</tr>
+								
+								<tr>
+									<td width="20%">Instances</td>
+									<td width="80%">1</td>
+								</tr>
+								<tr>
+									<td width="20%">Solution</td>
+									<td width="80%">
+											<div>Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to &#39;nosniff&#39; for all web pages.</div>
+											<br />
+										
+											<div>If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.</div>
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">Reference</td>
+									<td width="80%">
+											<a href="https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/gg622941(v=vs.85)">https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/gg622941(v=vs.85)</a>
+											<br />
+										
+											<a href="https://owasp.org/www-community/Security_Headers">https://owasp.org/www-community/Security_Headers</a>
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">Tags</td>
+									<td width="80%">
+
+											
+												<a href="https://cwe.mitre.org/data/definitions/693.html">CWE-693</a>
+											
+											
+											<br />
+										
+
+											
+												<a href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">OWASP_2021_A05</a>
+											
+											
+											<br />
+										
+
+											
+												<a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration.html">OWASP_2017_A06</a>
+											
+											
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">CWE Id</td>
+									<td width="80%"><a
+										href="https://cwe.mitre.org/data/definitions/693.html">693</a></td>
+								</tr>
+								<tr>
+									<td width="20%">WASC Id</td>
+									<td width="80%">15</td>
+								</tr>
+								<tr>
+									<td width="20%">Plugin Id</td>
+									<td width="80%"><a
+										href="https://www.zaproxy.org/docs/alerts/10021/">10021</a></td>
+								</tr>
+							</table>
+						</div>
+						<div class="spacer"></div>
+					
+						<div class="tableWrapper">
+							<table class="results" cellspacing="0" cellpadding="0">
+								<tr height="24">
+									<th width="20%" class="risk-0"><a
+										id="plugin-10104"></a>
+										<div>Informational</div></th>
+									<th class="risk-0">User Agent Fuzzer</th>
+								</tr>
+								<tr>
+									<td width="20%">Description</td>
+									<td width="80%">
+											<div>Check for differences in response based on fuzzed User Agent (eg. mobile sites, access as a Search Engine Crawler). Compares the response statuscode and the hashcode of the response body with the original response.</div>
+											
+										</td>
+								</tr>
+								<TR vAlign="top">
+									<TD colspan="2"></TD>
+								</TR>
+								
+									<tr>
+										<td width="20%"
+											class="indent1">URL</td>
+										<td width="80%"><a href="http://localhost:3000/api/orders">http://localhost:3000/api/orders</a></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Method</td>
+										<td width="80%">POST</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Parameter</td>
+										<td width="80%">Header User-Agent</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Attack</td>
+										<td width="80%">Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Evidence</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">
+											<div id="alert-195">
+												<a
+													onclick="showHide(&#39;alert-195&#39;);"
+													href="#195">Show / hide Request and Response</a>
+											</div>
+										</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Header
+											- size: 304 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-195reqh"
+												style="display: none;">
+												
+													POST http://localhost:3000/api/orders HTTP/1.1
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													user-agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)
+													<br />
+												
+													Accept: */*
+													<br />
+												
+													Cache-Control: no-cache
+													<br />
+												
+													Postman-Token: 1e7e1e1a-d9d1-4f8f-9b38-03ff8d289387
+													<br />
+												
+													host: localhost:3000
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Content-Length: 258
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Body
+											- size: 258 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-195reqb"
+												style="display: none;">
+												
+													[
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c49d29720c67ee18ebc0&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:2
+													<br />
+												
+													    },
+													<br />
+												
+													        {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c4c629720c67ee18ebc3&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    },
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66ac1c172841e2912d2c64bd&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    }
+													<br />
+												
+													]
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Header
+											- size: 292 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-195resph"
+												style="display: none;">
+												
+													HTTP/1.1 200 OK
+													<br />
+												
+													X-Powered-By: Express
+													<br />
+												
+													Access-Control-Allow-Origin: *
+													<br />
+												
+													Content-Type: application/json; charset=utf-8
+													<br />
+												
+													Content-Length: 796
+													<br />
+												
+													ETag: W/&quot;31c-+vhgWsPQarjmIR+mYpWqOdNMcYs&quot;
+													<br />
+												
+													Vary: Accept-Encoding
+													<br />
+												
+													Date: Thu, 08 Aug 2024 11:22:47 GMT
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Keep-Alive: timeout=5
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Body
+											- size: 796 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-195respb"
+												style="display: none;">
+												
+													{&quot;client_cpf&quot;:null,&quot;payment&quot;:null,&quot;items&quot;:[{&quot;id&quot;:178,&quot;quantity&quot;:2,&quot;price&quot;:15,&quot;total&quot;:30,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c49d29720c67ee18ebc0&quot;,&quot;name&quot;:&quot;Hambúrguer Clássico&quot;,&quot;description&quot;:&quot;Hambúrguer de carne com queijo, alface, tomate e molho especial.&quot;,&quot;category&quot;:&quot;Lanche&quot;,&quot;price&quot;:15}},{&quot;id&quot;:179,&quot;quantity&quot;:1,&quot;price&quot;:5,&quot;total&quot;:5,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c4c629720c67ee18ebc3&quot;,&quot;name&quot;:&quot;Refrigerante Lata&quot;,&quot;description&quot;:&quot;Refrigerante de diversos sabores, lata de 350ml.&quot;,&quot;category&quot;:&quot;Bebida&quot;,&quot;price&quot;:5}},{&quot;id&quot;:180,&quot;quantity&quot;:1,&quot;price&quot;:12,&quot;total&quot;:12,&quot;product&quot;:{&quot;id&quot;:&quot;66ac1c172841e2912d2c64bd&quot;,&quot;name&quot;:&quot;Batata Frita com cheddar&quot;,&quot;description&quot;:&quot;Loren Ipsum&quot;,&quot;category&quot;:&quot;Acompanhamento&quot;,&quot;price&quot;:12}}],&quot;id&quot;:60,&quot;status&quot;:&quot;Criado&quot;,&quot;total&quot;:32,&quot;created_at&quot;:&quot;2024-08-08T11:22:47.927Z&quot;,&quot;updated_at&quot;:&quot;2024-08-08T11:22:47.927Z&quot;}
+													
+												
+											</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width="20%"
+											class="indent1">URL</td>
+										<td width="80%"><a href="http://localhost:3000/api/orders">http://localhost:3000/api/orders</a></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Method</td>
+										<td width="80%">POST</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Parameter</td>
+										<td width="80%">Header User-Agent</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Attack</td>
+										<td width="80%">Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Evidence</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">
+											<div id="alert-194">
+												<a
+													onclick="showHide(&#39;alert-194&#39;);"
+													href="#194">Show / hide Request and Response</a>
+											</div>
+										</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Header
+											- size: 304 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-194reqh"
+												style="display: none;">
+												
+													POST http://localhost:3000/api/orders HTTP/1.1
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													user-agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)
+													<br />
+												
+													Accept: */*
+													<br />
+												
+													Cache-Control: no-cache
+													<br />
+												
+													Postman-Token: 1e7e1e1a-d9d1-4f8f-9b38-03ff8d289387
+													<br />
+												
+													host: localhost:3000
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Content-Length: 258
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Body
+											- size: 258 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-194reqb"
+												style="display: none;">
+												
+													[
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c49d29720c67ee18ebc0&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:2
+													<br />
+												
+													    },
+													<br />
+												
+													        {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c4c629720c67ee18ebc3&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    },
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66ac1c172841e2912d2c64bd&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    }
+													<br />
+												
+													]
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Header
+											- size: 292 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-194resph"
+												style="display: none;">
+												
+													HTTP/1.1 200 OK
+													<br />
+												
+													X-Powered-By: Express
+													<br />
+												
+													Access-Control-Allow-Origin: *
+													<br />
+												
+													Content-Type: application/json; charset=utf-8
+													<br />
+												
+													Content-Length: 796
+													<br />
+												
+													ETag: W/&quot;31c-gykYqjQMO5WyP3yttZPxKnLplnw&quot;
+													<br />
+												
+													Vary: Accept-Encoding
+													<br />
+												
+													Date: Thu, 08 Aug 2024 11:22:47 GMT
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Keep-Alive: timeout=5
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Body
+											- size: 796 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-194respb"
+												style="display: none;">
+												
+													{&quot;client_cpf&quot;:null,&quot;payment&quot;:null,&quot;items&quot;:[{&quot;id&quot;:175,&quot;quantity&quot;:2,&quot;price&quot;:15,&quot;total&quot;:30,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c49d29720c67ee18ebc0&quot;,&quot;name&quot;:&quot;Hambúrguer Clássico&quot;,&quot;description&quot;:&quot;Hambúrguer de carne com queijo, alface, tomate e molho especial.&quot;,&quot;category&quot;:&quot;Lanche&quot;,&quot;price&quot;:15}},{&quot;id&quot;:176,&quot;quantity&quot;:1,&quot;price&quot;:5,&quot;total&quot;:5,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c4c629720c67ee18ebc3&quot;,&quot;name&quot;:&quot;Refrigerante Lata&quot;,&quot;description&quot;:&quot;Refrigerante de diversos sabores, lata de 350ml.&quot;,&quot;category&quot;:&quot;Bebida&quot;,&quot;price&quot;:5}},{&quot;id&quot;:177,&quot;quantity&quot;:1,&quot;price&quot;:12,&quot;total&quot;:12,&quot;product&quot;:{&quot;id&quot;:&quot;66ac1c172841e2912d2c64bd&quot;,&quot;name&quot;:&quot;Batata Frita com cheddar&quot;,&quot;description&quot;:&quot;Loren Ipsum&quot;,&quot;category&quot;:&quot;Acompanhamento&quot;,&quot;price&quot;:12}}],&quot;id&quot;:59,&quot;status&quot;:&quot;Criado&quot;,&quot;total&quot;:32,&quot;created_at&quot;:&quot;2024-08-08T11:22:47.911Z&quot;,&quot;updated_at&quot;:&quot;2024-08-08T11:22:47.911Z&quot;}
+													
+												
+											</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width="20%"
+											class="indent1">URL</td>
+										<td width="80%"><a href="http://localhost:3000/api/orders">http://localhost:3000/api/orders</a></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Method</td>
+										<td width="80%">POST</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Parameter</td>
+										<td width="80%">Header User-Agent</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Attack</td>
+										<td width="80%">Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Evidence</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">
+											<div id="alert-193">
+												<a
+													onclick="showHide(&#39;alert-193&#39;);"
+													href="#193">Show / hide Request and Response</a>
+											</div>
+										</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Header
+											- size: 304 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-193reqh"
+												style="display: none;">
+												
+													POST http://localhost:3000/api/orders HTTP/1.1
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													user-agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)
+													<br />
+												
+													Accept: */*
+													<br />
+												
+													Cache-Control: no-cache
+													<br />
+												
+													Postman-Token: 1e7e1e1a-d9d1-4f8f-9b38-03ff8d289387
+													<br />
+												
+													host: localhost:3000
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Content-Length: 258
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Body
+											- size: 258 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-193reqb"
+												style="display: none;">
+												
+													[
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c49d29720c67ee18ebc0&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:2
+													<br />
+												
+													    },
+													<br />
+												
+													        {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c4c629720c67ee18ebc3&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    },
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66ac1c172841e2912d2c64bd&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    }
+													<br />
+												
+													]
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Header
+											- size: 292 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-193resph"
+												style="display: none;">
+												
+													HTTP/1.1 200 OK
+													<br />
+												
+													X-Powered-By: Express
+													<br />
+												
+													Access-Control-Allow-Origin: *
+													<br />
+												
+													Content-Type: application/json; charset=utf-8
+													<br />
+												
+													Content-Length: 796
+													<br />
+												
+													ETag: W/&quot;31c-CfAIMIji6kV5OhbY7/Zh6A4Wyv0&quot;
+													<br />
+												
+													Vary: Accept-Encoding
+													<br />
+												
+													Date: Thu, 08 Aug 2024 11:22:47 GMT
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Keep-Alive: timeout=5
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Body
+											- size: 796 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-193respb"
+												style="display: none;">
+												
+													{&quot;client_cpf&quot;:null,&quot;payment&quot;:null,&quot;items&quot;:[{&quot;id&quot;:172,&quot;quantity&quot;:2,&quot;price&quot;:15,&quot;total&quot;:30,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c49d29720c67ee18ebc0&quot;,&quot;name&quot;:&quot;Hambúrguer Clássico&quot;,&quot;description&quot;:&quot;Hambúrguer de carne com queijo, alface, tomate e molho especial.&quot;,&quot;category&quot;:&quot;Lanche&quot;,&quot;price&quot;:15}},{&quot;id&quot;:173,&quot;quantity&quot;:1,&quot;price&quot;:5,&quot;total&quot;:5,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c4c629720c67ee18ebc3&quot;,&quot;name&quot;:&quot;Refrigerante Lata&quot;,&quot;description&quot;:&quot;Refrigerante de diversos sabores, lata de 350ml.&quot;,&quot;category&quot;:&quot;Bebida&quot;,&quot;price&quot;:5}},{&quot;id&quot;:174,&quot;quantity&quot;:1,&quot;price&quot;:12,&quot;total&quot;:12,&quot;product&quot;:{&quot;id&quot;:&quot;66ac1c172841e2912d2c64bd&quot;,&quot;name&quot;:&quot;Batata Frita com cheddar&quot;,&quot;description&quot;:&quot;Loren Ipsum&quot;,&quot;category&quot;:&quot;Acompanhamento&quot;,&quot;price&quot;:12}}],&quot;id&quot;:58,&quot;status&quot;:&quot;Criado&quot;,&quot;total&quot;:32,&quot;created_at&quot;:&quot;2024-08-08T11:22:47.890Z&quot;,&quot;updated_at&quot;:&quot;2024-08-08T11:22:47.890Z&quot;}
+													
+												
+											</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width="20%"
+											class="indent1">URL</td>
+										<td width="80%"><a href="http://localhost:3000/api/orders">http://localhost:3000/api/orders</a></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Method</td>
+										<td width="80%">POST</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Parameter</td>
+										<td width="80%">Header User-Agent</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Attack</td>
+										<td width="80%">Mozilla/5.0 (Windows NT 10.0; Trident/7.0; rv:11.0) like Gecko</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Evidence</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">
+											<div id="alert-196">
+												<a
+													onclick="showHide(&#39;alert-196&#39;);"
+													href="#196">Show / hide Request and Response</a>
+											</div>
+										</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Header
+											- size: 316 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-196reqh"
+												style="display: none;">
+												
+													POST http://localhost:3000/api/orders HTTP/1.1
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													user-agent: Mozilla/5.0 (Windows NT 10.0; Trident/7.0; rv:11.0) like Gecko
+													<br />
+												
+													Accept: */*
+													<br />
+												
+													Cache-Control: no-cache
+													<br />
+												
+													Postman-Token: 1e7e1e1a-d9d1-4f8f-9b38-03ff8d289387
+													<br />
+												
+													host: localhost:3000
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Content-Length: 258
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Body
+											- size: 258 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-196reqb"
+												style="display: none;">
+												
+													[
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c49d29720c67ee18ebc0&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:2
+													<br />
+												
+													    },
+													<br />
+												
+													        {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c4c629720c67ee18ebc3&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    },
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66ac1c172841e2912d2c64bd&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    }
+													<br />
+												
+													]
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Header
+											- size: 292 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-196resph"
+												style="display: none;">
+												
+													HTTP/1.1 200 OK
+													<br />
+												
+													X-Powered-By: Express
+													<br />
+												
+													Access-Control-Allow-Origin: *
+													<br />
+												
+													Content-Type: application/json; charset=utf-8
+													<br />
+												
+													Content-Length: 796
+													<br />
+												
+													ETag: W/&quot;31c-LNo7++Z6QX4Ot95DTbBpe62lZBA&quot;
+													<br />
+												
+													Vary: Accept-Encoding
+													<br />
+												
+													Date: Thu, 08 Aug 2024 11:22:47 GMT
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Keep-Alive: timeout=5
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Body
+											- size: 796 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-196respb"
+												style="display: none;">
+												
+													{&quot;client_cpf&quot;:null,&quot;payment&quot;:null,&quot;items&quot;:[{&quot;id&quot;:181,&quot;quantity&quot;:2,&quot;price&quot;:15,&quot;total&quot;:30,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c49d29720c67ee18ebc0&quot;,&quot;name&quot;:&quot;Hambúrguer Clássico&quot;,&quot;description&quot;:&quot;Hambúrguer de carne com queijo, alface, tomate e molho especial.&quot;,&quot;category&quot;:&quot;Lanche&quot;,&quot;price&quot;:15}},{&quot;id&quot;:182,&quot;quantity&quot;:1,&quot;price&quot;:5,&quot;total&quot;:5,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c4c629720c67ee18ebc3&quot;,&quot;name&quot;:&quot;Refrigerante Lata&quot;,&quot;description&quot;:&quot;Refrigerante de diversos sabores, lata de 350ml.&quot;,&quot;category&quot;:&quot;Bebida&quot;,&quot;price&quot;:5}},{&quot;id&quot;:183,&quot;quantity&quot;:1,&quot;price&quot;:12,&quot;total&quot;:12,&quot;product&quot;:{&quot;id&quot;:&quot;66ac1c172841e2912d2c64bd&quot;,&quot;name&quot;:&quot;Batata Frita com cheddar&quot;,&quot;description&quot;:&quot;Loren Ipsum&quot;,&quot;category&quot;:&quot;Acompanhamento&quot;,&quot;price&quot;:12}}],&quot;id&quot;:61,&quot;status&quot;:&quot;Criado&quot;,&quot;total&quot;:32,&quot;created_at&quot;:&quot;2024-08-08T11:22:47.943Z&quot;,&quot;updated_at&quot;:&quot;2024-08-08T11:22:47.943Z&quot;}
+													
+												
+											</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width="20%"
+											class="indent1">URL</td>
+										<td width="80%"><a href="http://localhost:3000/api/orders">http://localhost:3000/api/orders</a></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Method</td>
+										<td width="80%">POST</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Parameter</td>
+										<td width="80%">Header User-Agent</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Attack</td>
+										<td width="80%">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3739.0 Safari/537.36 Edg/75.0.109.0</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Evidence</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">
+											<div id="alert-197">
+												<a
+													onclick="showHide(&#39;alert-197&#39;);"
+													href="#197">Show / hide Request and Response</a>
+											</div>
+										</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Header
+											- size: 382 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-197reqh"
+												style="display: none;">
+												
+													POST http://localhost:3000/api/orders HTTP/1.1
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3739.0 Safari/537.36 Edg/75.0.109.0
+													<br />
+												
+													Accept: */*
+													<br />
+												
+													Cache-Control: no-cache
+													<br />
+												
+													Postman-Token: 1e7e1e1a-d9d1-4f8f-9b38-03ff8d289387
+													<br />
+												
+													host: localhost:3000
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Content-Length: 258
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Body
+											- size: 258 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-197reqb"
+												style="display: none;">
+												
+													[
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c49d29720c67ee18ebc0&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:2
+													<br />
+												
+													    },
+													<br />
+												
+													        {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c4c629720c67ee18ebc3&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    },
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66ac1c172841e2912d2c64bd&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    }
+													<br />
+												
+													]
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Header
+											- size: 292 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-197resph"
+												style="display: none;">
+												
+													HTTP/1.1 200 OK
+													<br />
+												
+													X-Powered-By: Express
+													<br />
+												
+													Access-Control-Allow-Origin: *
+													<br />
+												
+													Content-Type: application/json; charset=utf-8
+													<br />
+												
+													Content-Length: 796
+													<br />
+												
+													ETag: W/&quot;31c-2dhylKKR6oG0caYbvzD9Ac2X+Xg&quot;
+													<br />
+												
+													Vary: Accept-Encoding
+													<br />
+												
+													Date: Thu, 08 Aug 2024 11:22:47 GMT
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Keep-Alive: timeout=5
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Body
+											- size: 796 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-197respb"
+												style="display: none;">
+												
+													{&quot;client_cpf&quot;:null,&quot;payment&quot;:null,&quot;items&quot;:[{&quot;id&quot;:184,&quot;quantity&quot;:2,&quot;price&quot;:15,&quot;total&quot;:30,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c49d29720c67ee18ebc0&quot;,&quot;name&quot;:&quot;Hambúrguer Clássico&quot;,&quot;description&quot;:&quot;Hambúrguer de carne com queijo, alface, tomate e molho especial.&quot;,&quot;category&quot;:&quot;Lanche&quot;,&quot;price&quot;:15}},{&quot;id&quot;:185,&quot;quantity&quot;:1,&quot;price&quot;:5,&quot;total&quot;:5,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c4c629720c67ee18ebc3&quot;,&quot;name&quot;:&quot;Refrigerante Lata&quot;,&quot;description&quot;:&quot;Refrigerante de diversos sabores, lata de 350ml.&quot;,&quot;category&quot;:&quot;Bebida&quot;,&quot;price&quot;:5}},{&quot;id&quot;:186,&quot;quantity&quot;:1,&quot;price&quot;:12,&quot;total&quot;:12,&quot;product&quot;:{&quot;id&quot;:&quot;66ac1c172841e2912d2c64bd&quot;,&quot;name&quot;:&quot;Batata Frita com cheddar&quot;,&quot;description&quot;:&quot;Loren Ipsum&quot;,&quot;category&quot;:&quot;Acompanhamento&quot;,&quot;price&quot;:12}}],&quot;id&quot;:62,&quot;status&quot;:&quot;Criado&quot;,&quot;total&quot;:32,&quot;created_at&quot;:&quot;2024-08-08T11:22:47.967Z&quot;,&quot;updated_at&quot;:&quot;2024-08-08T11:22:47.967Z&quot;}
+													
+												
+											</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width="20%"
+											class="indent1">URL</td>
+										<td width="80%"><a href="http://localhost:3000/api/orders">http://localhost:3000/api/orders</a></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Method</td>
+										<td width="80%">POST</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Parameter</td>
+										<td width="80%">Header User-Agent</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Attack</td>
+										<td width="80%">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Evidence</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">
+											<div id="alert-204">
+												<a
+													onclick="showHide(&#39;alert-204&#39;);"
+													href="#204">Show / hide Request and Response</a>
+											</div>
+										</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Header
+											- size: 369 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-204reqh"
+												style="display: none;">
+												
+													POST http://localhost:3000/api/orders HTTP/1.1
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+													<br />
+												
+													Accept: */*
+													<br />
+												
+													Cache-Control: no-cache
+													<br />
+												
+													Postman-Token: 1e7e1e1a-d9d1-4f8f-9b38-03ff8d289387
+													<br />
+												
+													host: localhost:3000
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Content-Length: 258
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Body
+											- size: 258 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-204reqb"
+												style="display: none;">
+												
+													[
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c49d29720c67ee18ebc0&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:2
+													<br />
+												
+													    },
+													<br />
+												
+													        {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c4c629720c67ee18ebc3&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    },
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66ac1c172841e2912d2c64bd&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    }
+													<br />
+												
+													]
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Header
+											- size: 292 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-204resph"
+												style="display: none;">
+												
+													HTTP/1.1 200 OK
+													<br />
+												
+													X-Powered-By: Express
+													<br />
+												
+													Access-Control-Allow-Origin: *
+													<br />
+												
+													Content-Type: application/json; charset=utf-8
+													<br />
+												
+													Content-Length: 796
+													<br />
+												
+													ETag: W/&quot;31c-pKVXw5dLPca6nvv9p2AXv0ZhT7c&quot;
+													<br />
+												
+													Vary: Accept-Encoding
+													<br />
+												
+													Date: Thu, 08 Aug 2024 11:22:48 GMT
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Keep-Alive: timeout=5
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Body
+											- size: 796 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-204respb"
+												style="display: none;">
+												
+													{&quot;client_cpf&quot;:null,&quot;payment&quot;:null,&quot;items&quot;:[{&quot;id&quot;:205,&quot;quantity&quot;:2,&quot;price&quot;:15,&quot;total&quot;:30,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c49d29720c67ee18ebc0&quot;,&quot;name&quot;:&quot;Hambúrguer Clássico&quot;,&quot;description&quot;:&quot;Hambúrguer de carne com queijo, alface, tomate e molho especial.&quot;,&quot;category&quot;:&quot;Lanche&quot;,&quot;price&quot;:15}},{&quot;id&quot;:206,&quot;quantity&quot;:1,&quot;price&quot;:5,&quot;total&quot;:5,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c4c629720c67ee18ebc3&quot;,&quot;name&quot;:&quot;Refrigerante Lata&quot;,&quot;description&quot;:&quot;Refrigerante de diversos sabores, lata de 350ml.&quot;,&quot;category&quot;:&quot;Bebida&quot;,&quot;price&quot;:5}},{&quot;id&quot;:207,&quot;quantity&quot;:1,&quot;price&quot;:12,&quot;total&quot;:12,&quot;product&quot;:{&quot;id&quot;:&quot;66ac1c172841e2912d2c64bd&quot;,&quot;name&quot;:&quot;Batata Frita com cheddar&quot;,&quot;description&quot;:&quot;Loren Ipsum&quot;,&quot;category&quot;:&quot;Acompanhamento&quot;,&quot;price&quot;:12}}],&quot;id&quot;:69,&quot;status&quot;:&quot;Criado&quot;,&quot;total&quot;:32,&quot;created_at&quot;:&quot;2024-08-08T11:22:48.100Z&quot;,&quot;updated_at&quot;:&quot;2024-08-08T11:22:48.100Z&quot;}
+													
+												
+											</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width="20%"
+											class="indent1">URL</td>
+										<td width="80%"><a href="http://localhost:3000/api/orders">http://localhost:3000/api/orders</a></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Method</td>
+										<td width="80%">POST</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Parameter</td>
+										<td width="80%">Header User-Agent</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Attack</td>
+										<td width="80%">Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/91.0</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Evidence</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">
+											<div id="alert-203">
+												<a
+													onclick="showHide(&#39;alert-203&#39;);"
+													href="#203">Show / hide Request and Response</a>
+											</div>
+										</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Header
+											- size: 332 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-203reqh"
+												style="display: none;">
+												
+													POST http://localhost:3000/api/orders HTTP/1.1
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/91.0
+													<br />
+												
+													Accept: */*
+													<br />
+												
+													Cache-Control: no-cache
+													<br />
+												
+													Postman-Token: 1e7e1e1a-d9d1-4f8f-9b38-03ff8d289387
+													<br />
+												
+													host: localhost:3000
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Content-Length: 258
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Body
+											- size: 258 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-203reqb"
+												style="display: none;">
+												
+													[
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c49d29720c67ee18ebc0&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:2
+													<br />
+												
+													    },
+													<br />
+												
+													        {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c4c629720c67ee18ebc3&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    },
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66ac1c172841e2912d2c64bd&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    }
+													<br />
+												
+													]
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Header
+											- size: 292 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-203resph"
+												style="display: none;">
+												
+													HTTP/1.1 200 OK
+													<br />
+												
+													X-Powered-By: Express
+													<br />
+												
+													Access-Control-Allow-Origin: *
+													<br />
+												
+													Content-Type: application/json; charset=utf-8
+													<br />
+												
+													Content-Length: 796
+													<br />
+												
+													ETag: W/&quot;31c-goBYGmFiZdSpeWcHWFV6sd972SU&quot;
+													<br />
+												
+													Vary: Accept-Encoding
+													<br />
+												
+													Date: Thu, 08 Aug 2024 11:22:48 GMT
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Keep-Alive: timeout=5
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Body
+											- size: 796 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-203respb"
+												style="display: none;">
+												
+													{&quot;client_cpf&quot;:null,&quot;payment&quot;:null,&quot;items&quot;:[{&quot;id&quot;:202,&quot;quantity&quot;:2,&quot;price&quot;:15,&quot;total&quot;:30,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c49d29720c67ee18ebc0&quot;,&quot;name&quot;:&quot;Hambúrguer Clássico&quot;,&quot;description&quot;:&quot;Hambúrguer de carne com queijo, alface, tomate e molho especial.&quot;,&quot;category&quot;:&quot;Lanche&quot;,&quot;price&quot;:15}},{&quot;id&quot;:203,&quot;quantity&quot;:1,&quot;price&quot;:5,&quot;total&quot;:5,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c4c629720c67ee18ebc3&quot;,&quot;name&quot;:&quot;Refrigerante Lata&quot;,&quot;description&quot;:&quot;Refrigerante de diversos sabores, lata de 350ml.&quot;,&quot;category&quot;:&quot;Bebida&quot;,&quot;price&quot;:5}},{&quot;id&quot;:204,&quot;quantity&quot;:1,&quot;price&quot;:12,&quot;total&quot;:12,&quot;product&quot;:{&quot;id&quot;:&quot;66ac1c172841e2912d2c64bd&quot;,&quot;name&quot;:&quot;Batata Frita com cheddar&quot;,&quot;description&quot;:&quot;Loren Ipsum&quot;,&quot;category&quot;:&quot;Acompanhamento&quot;,&quot;price&quot;:12}}],&quot;id&quot;:68,&quot;status&quot;:&quot;Criado&quot;,&quot;total&quot;:32,&quot;created_at&quot;:&quot;2024-08-08T11:22:48.080Z&quot;,&quot;updated_at&quot;:&quot;2024-08-08T11:22:48.080Z&quot;}
+													
+												
+											</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width="20%"
+											class="indent1">URL</td>
+										<td width="80%"><a href="http://localhost:3000/api/orders">http://localhost:3000/api/orders</a></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Method</td>
+										<td width="80%">POST</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Parameter</td>
+										<td width="80%">Header User-Agent</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Attack</td>
+										<td width="80%">Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Evidence</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">
+											<div id="alert-198">
+												<a
+													onclick="showHide(&#39;alert-198&#39;);"
+													href="#198">Show / hide Request and Response</a>
+											</div>
+										</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Header
+											- size: 326 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-198reqh"
+												style="display: none;">
+												
+													POST http://localhost:3000/api/orders HTTP/1.1
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													user-agent: Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)
+													<br />
+												
+													Accept: */*
+													<br />
+												
+													Cache-Control: no-cache
+													<br />
+												
+													Postman-Token: 1e7e1e1a-d9d1-4f8f-9b38-03ff8d289387
+													<br />
+												
+													host: localhost:3000
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Content-Length: 258
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Body
+											- size: 258 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-198reqb"
+												style="display: none;">
+												
+													[
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c49d29720c67ee18ebc0&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:2
+													<br />
+												
+													    },
+													<br />
+												
+													        {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c4c629720c67ee18ebc3&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    },
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66ac1c172841e2912d2c64bd&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    }
+													<br />
+												
+													]
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Header
+											- size: 292 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-198resph"
+												style="display: none;">
+												
+													HTTP/1.1 200 OK
+													<br />
+												
+													X-Powered-By: Express
+													<br />
+												
+													Access-Control-Allow-Origin: *
+													<br />
+												
+													Content-Type: application/json; charset=utf-8
+													<br />
+												
+													Content-Length: 796
+													<br />
+												
+													ETag: W/&quot;31c-csWnxovhuSn8USq2fP7v0lP/wh4&quot;
+													<br />
+												
+													Vary: Accept-Encoding
+													<br />
+												
+													Date: Thu, 08 Aug 2024 11:22:47 GMT
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Keep-Alive: timeout=5
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Body
+											- size: 796 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-198respb"
+												style="display: none;">
+												
+													{&quot;client_cpf&quot;:null,&quot;payment&quot;:null,&quot;items&quot;:[{&quot;id&quot;:187,&quot;quantity&quot;:2,&quot;price&quot;:15,&quot;total&quot;:30,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c49d29720c67ee18ebc0&quot;,&quot;name&quot;:&quot;Hambúrguer Clássico&quot;,&quot;description&quot;:&quot;Hambúrguer de carne com queijo, alface, tomate e molho especial.&quot;,&quot;category&quot;:&quot;Lanche&quot;,&quot;price&quot;:15}},{&quot;id&quot;:188,&quot;quantity&quot;:1,&quot;price&quot;:5,&quot;total&quot;:5,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c4c629720c67ee18ebc3&quot;,&quot;name&quot;:&quot;Refrigerante Lata&quot;,&quot;description&quot;:&quot;Refrigerante de diversos sabores, lata de 350ml.&quot;,&quot;category&quot;:&quot;Bebida&quot;,&quot;price&quot;:5}},{&quot;id&quot;:189,&quot;quantity&quot;:1,&quot;price&quot;:12,&quot;total&quot;:12,&quot;product&quot;:{&quot;id&quot;:&quot;66ac1c172841e2912d2c64bd&quot;,&quot;name&quot;:&quot;Batata Frita com cheddar&quot;,&quot;description&quot;:&quot;Loren Ipsum&quot;,&quot;category&quot;:&quot;Acompanhamento&quot;,&quot;price&quot;:12}}],&quot;id&quot;:63,&quot;status&quot;:&quot;Criado&quot;,&quot;total&quot;:32,&quot;created_at&quot;:&quot;2024-08-08T11:22:47.986Z&quot;,&quot;updated_at&quot;:&quot;2024-08-08T11:22:47.986Z&quot;}
+													
+												
+											</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width="20%"
+											class="indent1">URL</td>
+										<td width="80%"><a href="http://localhost:3000/api/orders">http://localhost:3000/api/orders</a></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Method</td>
+										<td width="80%">POST</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Parameter</td>
+										<td width="80%">Header User-Agent</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Attack</td>
+										<td width="80%">Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Evidence</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">
+											<div id="alert-200">
+												<a
+													onclick="showHide(&#39;alert-200&#39;);"
+													href="#200">Show / hide Request and Response</a>
+											</div>
+										</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Header
+											- size: 337 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-200reqh"
+												style="display: none;">
+												
+													POST http://localhost:3000/api/orders HTTP/1.1
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													user-agent: Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)
+													<br />
+												
+													Accept: */*
+													<br />
+												
+													Cache-Control: no-cache
+													<br />
+												
+													Postman-Token: 1e7e1e1a-d9d1-4f8f-9b38-03ff8d289387
+													<br />
+												
+													host: localhost:3000
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Content-Length: 258
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Body
+											- size: 258 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-200reqb"
+												style="display: none;">
+												
+													[
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c49d29720c67ee18ebc0&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:2
+													<br />
+												
+													    },
+													<br />
+												
+													        {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c4c629720c67ee18ebc3&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    },
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66ac1c172841e2912d2c64bd&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    }
+													<br />
+												
+													]
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Header
+											- size: 292 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-200resph"
+												style="display: none;">
+												
+													HTTP/1.1 200 OK
+													<br />
+												
+													X-Powered-By: Express
+													<br />
+												
+													Access-Control-Allow-Origin: *
+													<br />
+												
+													Content-Type: application/json; charset=utf-8
+													<br />
+												
+													Content-Length: 796
+													<br />
+												
+													ETag: W/&quot;31c-M1eHZxpZ6DqSHU+9prgPzl2RB3k&quot;
+													<br />
+												
+													Vary: Accept-Encoding
+													<br />
+												
+													Date: Thu, 08 Aug 2024 11:22:48 GMT
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Keep-Alive: timeout=5
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Body
+											- size: 796 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-200respb"
+												style="display: none;">
+												
+													{&quot;client_cpf&quot;:null,&quot;payment&quot;:null,&quot;items&quot;:[{&quot;id&quot;:193,&quot;quantity&quot;:2,&quot;price&quot;:15,&quot;total&quot;:30,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c49d29720c67ee18ebc0&quot;,&quot;name&quot;:&quot;Hambúrguer Clássico&quot;,&quot;description&quot;:&quot;Hambúrguer de carne com queijo, alface, tomate e molho especial.&quot;,&quot;category&quot;:&quot;Lanche&quot;,&quot;price&quot;:15}},{&quot;id&quot;:194,&quot;quantity&quot;:1,&quot;price&quot;:5,&quot;total&quot;:5,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c4c629720c67ee18ebc3&quot;,&quot;name&quot;:&quot;Refrigerante Lata&quot;,&quot;description&quot;:&quot;Refrigerante de diversos sabores, lata de 350ml.&quot;,&quot;category&quot;:&quot;Bebida&quot;,&quot;price&quot;:5}},{&quot;id&quot;:195,&quot;quantity&quot;:1,&quot;price&quot;:12,&quot;total&quot;:12,&quot;product&quot;:{&quot;id&quot;:&quot;66ac1c172841e2912d2c64bd&quot;,&quot;name&quot;:&quot;Batata Frita com cheddar&quot;,&quot;description&quot;:&quot;Loren Ipsum&quot;,&quot;category&quot;:&quot;Acompanhamento&quot;,&quot;price&quot;:12}}],&quot;id&quot;:65,&quot;status&quot;:&quot;Criado&quot;,&quot;total&quot;:32,&quot;created_at&quot;:&quot;2024-08-08T11:22:48.021Z&quot;,&quot;updated_at&quot;:&quot;2024-08-08T11:22:48.021Z&quot;}
+													
+												
+											</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width="20%"
+											class="indent1">URL</td>
+										<td width="80%"><a href="http://localhost:3000/api/orders">http://localhost:3000/api/orders</a></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Method</td>
+										<td width="80%">POST</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Parameter</td>
+										<td width="80%">Header User-Agent</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Attack</td>
+										<td width="80%">Mozilla/5.0 (iPhone; CPU iPhone OS 8_0_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12A366 Safari/600.1.4</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Evidence</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">
+											<div id="alert-202">
+												<a
+													onclick="showHide(&#39;alert-202&#39;);"
+													href="#202">Show / hide Request and Response</a>
+											</div>
+										</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Header
+											- size: 390 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-202reqh"
+												style="display: none;">
+												
+													POST http://localhost:3000/api/orders HTTP/1.1
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													user-agent: Mozilla/5.0 (iPhone; CPU iPhone OS 8_0_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12A366 Safari/600.1.4
+													<br />
+												
+													Accept: */*
+													<br />
+												
+													Cache-Control: no-cache
+													<br />
+												
+													Postman-Token: 1e7e1e1a-d9d1-4f8f-9b38-03ff8d289387
+													<br />
+												
+													host: localhost:3000
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Content-Length: 258
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Body
+											- size: 258 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-202reqb"
+												style="display: none;">
+												
+													[
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c49d29720c67ee18ebc0&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:2
+													<br />
+												
+													    },
+													<br />
+												
+													        {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c4c629720c67ee18ebc3&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    },
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66ac1c172841e2912d2c64bd&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    }
+													<br />
+												
+													]
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Header
+											- size: 292 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-202resph"
+												style="display: none;">
+												
+													HTTP/1.1 200 OK
+													<br />
+												
+													X-Powered-By: Express
+													<br />
+												
+													Access-Control-Allow-Origin: *
+													<br />
+												
+													Content-Type: application/json; charset=utf-8
+													<br />
+												
+													Content-Length: 796
+													<br />
+												
+													ETag: W/&quot;31c-TM4woDZLHxVO4ZT09q6Cen8EtJg&quot;
+													<br />
+												
+													Vary: Accept-Encoding
+													<br />
+												
+													Date: Thu, 08 Aug 2024 11:22:48 GMT
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Keep-Alive: timeout=5
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Body
+											- size: 796 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-202respb"
+												style="display: none;">
+												
+													{&quot;client_cpf&quot;:null,&quot;payment&quot;:null,&quot;items&quot;:[{&quot;id&quot;:199,&quot;quantity&quot;:2,&quot;price&quot;:15,&quot;total&quot;:30,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c49d29720c67ee18ebc0&quot;,&quot;name&quot;:&quot;Hambúrguer Clássico&quot;,&quot;description&quot;:&quot;Hambúrguer de carne com queijo, alface, tomate e molho especial.&quot;,&quot;category&quot;:&quot;Lanche&quot;,&quot;price&quot;:15}},{&quot;id&quot;:200,&quot;quantity&quot;:1,&quot;price&quot;:5,&quot;total&quot;:5,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c4c629720c67ee18ebc3&quot;,&quot;name&quot;:&quot;Refrigerante Lata&quot;,&quot;description&quot;:&quot;Refrigerante de diversos sabores, lata de 350ml.&quot;,&quot;category&quot;:&quot;Bebida&quot;,&quot;price&quot;:5}},{&quot;id&quot;:201,&quot;quantity&quot;:1,&quot;price&quot;:12,&quot;total&quot;:12,&quot;product&quot;:{&quot;id&quot;:&quot;66ac1c172841e2912d2c64bd&quot;,&quot;name&quot;:&quot;Batata Frita com cheddar&quot;,&quot;description&quot;:&quot;Loren Ipsum&quot;,&quot;category&quot;:&quot;Acompanhamento&quot;,&quot;price&quot;:12}}],&quot;id&quot;:67,&quot;status&quot;:&quot;Criado&quot;,&quot;total&quot;:32,&quot;created_at&quot;:&quot;2024-08-08T11:22:48.063Z&quot;,&quot;updated_at&quot;:&quot;2024-08-08T11:22:48.063Z&quot;}
+													
+												
+											</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width="20%"
+											class="indent1">URL</td>
+										<td width="80%"><a href="http://localhost:3000/api/orders">http://localhost:3000/api/orders</a></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Method</td>
+										<td width="80%">POST</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Parameter</td>
+										<td width="80%">Header User-Agent</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Attack</td>
+										<td width="80%">Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Evidence</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">
+											<div id="alert-201">
+												<a
+													onclick="showHide(&#39;alert-201&#39;);"
+													href="#201">Show / hide Request and Response</a>
+											</div>
+										</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Header
+											- size: 395 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-201reqh"
+												style="display: none;">
+												
+													POST http://localhost:3000/api/orders HTTP/1.1
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													user-agent: Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16
+													<br />
+												
+													Accept: */*
+													<br />
+												
+													Cache-Control: no-cache
+													<br />
+												
+													Postman-Token: 1e7e1e1a-d9d1-4f8f-9b38-03ff8d289387
+													<br />
+												
+													host: localhost:3000
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Content-Length: 258
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Body
+											- size: 258 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-201reqb"
+												style="display: none;">
+												
+													[
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c49d29720c67ee18ebc0&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:2
+													<br />
+												
+													    },
+													<br />
+												
+													        {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c4c629720c67ee18ebc3&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    },
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66ac1c172841e2912d2c64bd&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    }
+													<br />
+												
+													]
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Header
+											- size: 292 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-201resph"
+												style="display: none;">
+												
+													HTTP/1.1 200 OK
+													<br />
+												
+													X-Powered-By: Express
+													<br />
+												
+													Access-Control-Allow-Origin: *
+													<br />
+												
+													Content-Type: application/json; charset=utf-8
+													<br />
+												
+													Content-Length: 796
+													<br />
+												
+													ETag: W/&quot;31c-FeOXfjhCM/lbSe8k1gkLWbd1Av0&quot;
+													<br />
+												
+													Vary: Accept-Encoding
+													<br />
+												
+													Date: Thu, 08 Aug 2024 11:22:48 GMT
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Keep-Alive: timeout=5
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Body
+											- size: 796 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-201respb"
+												style="display: none;">
+												
+													{&quot;client_cpf&quot;:null,&quot;payment&quot;:null,&quot;items&quot;:[{&quot;id&quot;:196,&quot;quantity&quot;:2,&quot;price&quot;:15,&quot;total&quot;:30,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c49d29720c67ee18ebc0&quot;,&quot;name&quot;:&quot;Hambúrguer Clássico&quot;,&quot;description&quot;:&quot;Hambúrguer de carne com queijo, alface, tomate e molho especial.&quot;,&quot;category&quot;:&quot;Lanche&quot;,&quot;price&quot;:15}},{&quot;id&quot;:197,&quot;quantity&quot;:1,&quot;price&quot;:5,&quot;total&quot;:5,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c4c629720c67ee18ebc3&quot;,&quot;name&quot;:&quot;Refrigerante Lata&quot;,&quot;description&quot;:&quot;Refrigerante de diversos sabores, lata de 350ml.&quot;,&quot;category&quot;:&quot;Bebida&quot;,&quot;price&quot;:5}},{&quot;id&quot;:198,&quot;quantity&quot;:1,&quot;price&quot;:12,&quot;total&quot;:12,&quot;product&quot;:{&quot;id&quot;:&quot;66ac1c172841e2912d2c64bd&quot;,&quot;name&quot;:&quot;Batata Frita com cheddar&quot;,&quot;description&quot;:&quot;Loren Ipsum&quot;,&quot;category&quot;:&quot;Acompanhamento&quot;,&quot;price&quot;:12}}],&quot;id&quot;:66,&quot;status&quot;:&quot;Criado&quot;,&quot;total&quot;:32,&quot;created_at&quot;:&quot;2024-08-08T11:22:48.041Z&quot;,&quot;updated_at&quot;:&quot;2024-08-08T11:22:48.041Z&quot;}
+													
+												
+											</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width="20%"
+											class="indent1">URL</td>
+										<td width="80%"><a href="http://localhost:3000/api/orders">http://localhost:3000/api/orders</a></td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Method</td>
+										<td width="80%">POST</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Parameter</td>
+										<td width="80%">Header User-Agent</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Attack</td>
+										<td width="80%">msnbot/1.1 (+http://search.msn.com/msnbot.htm)</td>
+									</tr>
+									<tr>
+										<td width="20%"
+											class="indent2">Evidence</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">
+											<div id="alert-199">
+												<a
+													onclick="showHide(&#39;alert-199&#39;);"
+													href="#199">Show / hide Request and Response</a>
+											</div>
+										</td>
+										<td width="80%"></td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Header
+											- size: 300 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-199reqh"
+												style="display: none;">
+												
+													POST http://localhost:3000/api/orders HTTP/1.1
+													<br />
+												
+													Content-Type: application/json
+													<br />
+												
+													user-agent: msnbot/1.1 (+http://search.msn.com/msnbot.htm)
+													<br />
+												
+													Accept: */*
+													<br />
+												
+													Cache-Control: no-cache
+													<br />
+												
+													Postman-Token: 1e7e1e1a-d9d1-4f8f-9b38-03ff8d289387
+													<br />
+												
+													host: localhost:3000
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Content-Length: 258
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Request Body
+											- size: 258 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-199reqb"
+												style="display: none;">
+												
+													[
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c49d29720c67ee18ebc0&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:2
+													<br />
+												
+													    },
+													<br />
+												
+													        {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66b2c4c629720c67ee18ebc3&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    },
+													<br />
+												
+													    {
+													<br />
+												
+													        &quot;product_id&quot;: &quot;66ac1c172841e2912d2c64bd&quot;,
+													<br />
+												
+													        &quot;quantity&quot;:1
+													<br />
+												
+													    }
+													<br />
+												
+													]
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Header
+											- size: 292 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-199resph"
+												style="display: none;">
+												
+													HTTP/1.1 200 OK
+													<br />
+												
+													X-Powered-By: Express
+													<br />
+												
+													Access-Control-Allow-Origin: *
+													<br />
+												
+													Content-Type: application/json; charset=utf-8
+													<br />
+												
+													Content-Length: 796
+													<br />
+												
+													ETag: W/&quot;31c-gdyR99JlZTPD63FcB26Xbnwh5X8&quot;
+													<br />
+												
+													Vary: Accept-Encoding
+													<br />
+												
+													Date: Thu, 08 Aug 2024 11:22:48 GMT
+													<br />
+												
+													Connection: keep-alive
+													<br />
+												
+													Keep-Alive: timeout=5
+													<br />
+												
+													
+													
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td width="20%" class="indent2">Response Body
+											- size: 796 bytes.
+										</td>
+										<td width="80%">
+											<div
+												id="alert-199respb"
+												style="display: none;">
+												
+													{&quot;client_cpf&quot;:null,&quot;payment&quot;:null,&quot;items&quot;:[{&quot;id&quot;:190,&quot;quantity&quot;:2,&quot;price&quot;:15,&quot;total&quot;:30,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c49d29720c67ee18ebc0&quot;,&quot;name&quot;:&quot;Hambúrguer Clássico&quot;,&quot;description&quot;:&quot;Hambúrguer de carne com queijo, alface, tomate e molho especial.&quot;,&quot;category&quot;:&quot;Lanche&quot;,&quot;price&quot;:15}},{&quot;id&quot;:191,&quot;quantity&quot;:1,&quot;price&quot;:5,&quot;total&quot;:5,&quot;product&quot;:{&quot;id&quot;:&quot;66b2c4c629720c67ee18ebc3&quot;,&quot;name&quot;:&quot;Refrigerante Lata&quot;,&quot;description&quot;:&quot;Refrigerante de diversos sabores, lata de 350ml.&quot;,&quot;category&quot;:&quot;Bebida&quot;,&quot;price&quot;:5}},{&quot;id&quot;:192,&quot;quantity&quot;:1,&quot;price&quot;:12,&quot;total&quot;:12,&quot;product&quot;:{&quot;id&quot;:&quot;66ac1c172841e2912d2c64bd&quot;,&quot;name&quot;:&quot;Batata Frita com cheddar&quot;,&quot;description&quot;:&quot;Loren Ipsum&quot;,&quot;category&quot;:&quot;Acompanhamento&quot;,&quot;price&quot;:12}}],&quot;id&quot;:64,&quot;status&quot;:&quot;Criado&quot;,&quot;total&quot;:32,&quot;created_at&quot;:&quot;2024-08-08T11:22:48.004Z&quot;,&quot;updated_at&quot;:&quot;2024-08-08T11:22:48.004Z&quot;}
+													
+												
+											</div>
+										</td>
+									</tr>
+								
+								<tr>
+									<td width="20%">Instances</td>
+									<td width="80%">12</td>
+								</tr>
+								<tr>
+									<td width="20%">Solution</td>
+									<td width="80%"></td>
+								</tr>
+								<tr>
+									<td width="20%">Reference</td>
+									<td width="80%">
+											<a href="https://owasp.org/wstg">https://owasp.org/wstg</a>
+											
+										</td>
+								</tr>
+								<tr>
+									<td width="20%">Tags</td>
+									<td width="80%"></td>
+								</tr>
+								<tr>
+									<td width="20%">CWE Id</td>
+									<td width="80%"></td>
+								</tr>
+								<tr>
+									<td width="20%">WASC Id</td>
+									<td width="80%"></td>
+								</tr>
+								<tr>
+									<td width="20%">Plugin Id</td>
+									<td width="80%"><a
+										href="https://www.zaproxy.org/docs/alerts/10104/">10104</a></td>
+								</tr>
+							</table>
+						</div>
+						<div class="spacer"></div>
+					
+				
+
+				<footer>
+					Report by 
+					<a href="https://www.zaproxy.org/" target="_blank">ZAP</a>
+					
+				</footer>
+
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>
